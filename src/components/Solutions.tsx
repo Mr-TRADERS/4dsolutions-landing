@@ -1,0 +1,465 @@
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import dynamic from "next/dynamic";
+
+// DYNAMIC IMPORT FOR LOTTIE PLAYER
+const LottiePlayer = dynamic(
+  () => import("@lottiefiles/react-lottie-player").then((mod) => mod.Player),
+  { ssr: false }
+);
+
+// LOTTIE ANIMATION PATH
+const LOTTIE_LINES_URL = "/anims/lines.json";
+
+const products = [
+  {
+    id: 1,
+    title: "EcoTrack PRO",
+    description:
+      "A comprehensive web-based platform designed for real-time monitoring, reporting, and compliance management of critical environmental data.",
+    features: [
+      "Real-Time Alerts",
+      "Automated Reports",
+      "Audit-Ready Compliance",
+      "Data Visualization Dashboards",
+      "User Role Management",
+    ],
+    image: "/EMS/ems11.jpeg",
+  },
+  {
+    id: 2,
+    title: "SteriTrack",
+    description:
+      "SteriTrack is a smart app for real-time sterilization monitoring, providing live temperature data and complete cycle records directly from your autoclaves.",
+    features: [
+      "Real-Time Monitoring",
+      "Smart Cycle Management",
+      "Complete Record Keeping",
+      "User & Role Management",
+      "Customizable Configuration",
+    ],
+    images: [
+      "/SteriTrack/Cycle.jpeg",
+      "/SteriTrack/Dash.jpeg",
+      "/SteriTrack/Admin.jpeg",
+    ],
+  },
+  {
+    id: 3,
+    title: "Petri Metrics",
+    description:
+      "Zone Reader is an AI tool that measures inhibition zones on assay plates with precision, easy verification, and USP81 compliance.",
+    features: [
+      "Auto-detect and measures zones",
+      "Converts pixels to millimeters",
+      "Digital calipers for verification",
+      "Manual edits with audit trail",
+      "USP81 compliance assured",
+    ],
+    image: "/ZoneReader/zone2.jpeg",
+  },
+];
+
+export default function SolutionsAlternating() {
+  const lottieRef = useRef<any>(null);
+  const [showSplash, setShowSplash] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
+  const product3Ref = useRef<HTMLDivElement | null>(null);
+
+  const [currentTime, setCurrentTime] = useState<string>("");
+
+  const [emsIndex, setEmsIndex] = useState(0);
+  const emsIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const emsImages = [
+    "/EMS/ems11.jpeg",
+    "/EMS/Login.png",
+    "/EMS/Login2.png",
+    "/EMS/ems2.jpeg",
+    "/EMS/ems3.jpeg",
+    "/EMS/ems4.jpeg",
+  ];
+
+  const startEMSLoop = () => {
+    if (emsIntervalRef.current) return;
+    setEmsIndex((prev) => (prev + 1) % emsImages.length);
+    emsIntervalRef.current = setInterval(() => {
+      setEmsIndex((prev) => (prev + 1) % emsImages.length);
+    }, 1500);
+  };
+
+  const stopEMSLoop = () => {
+    if (emsIntervalRef.current) {
+      clearInterval(emsIntervalRef.current);
+      emsIntervalRef.current = null;
+    }
+    setEmsIndex(0);
+  };
+
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+
+    if (product3Ref.current) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setShowSplash(true);
+
+              const fadeTimer = setTimeout(() => setFadeOut(true), 2200);
+              const hideTimer = setTimeout(() => setShowSplash(false), 2600);
+
+              observer.unobserve(entry.target);
+              return () => {
+                clearTimeout(fadeTimer);
+                clearTimeout(hideTimer);
+              };
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      observer.observe(product3Ref.current);
+    }
+  }, []);
+
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      const options: Intl.DateTimeFormatOptions = {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      };
+      setCurrentTime(now.toLocaleTimeString([], options));
+    };
+
+    updateClock();
+    const timer = setInterval(updateClock, 60000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // 🟢 LOTTIE CONTROL: play once and stay at last frame
+  useEffect(() => {
+    if (lottieRef.current) {
+      const instance = lottieRef.current;
+      instance.goToAndStop(0, true); // start at first frame
+      instance.play();
+      instance.addEventListener("complete", () => {
+        const lastFrame = instance.getDuration(true);
+        instance.goToAndStop(lastFrame, true);
+      });
+    }
+  }, []);
+
+  return (
+    <section
+      id="solutions"
+      className="bg-white text-gray-900 py-16 px-6 relative overflow-hidden"
+    >
+      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none"></div>
+
+      <div className="max-w-6xl mx-auto space-y-16 relative z-10">
+        {/* Section Heading */}
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold" data-aos="fade-down">
+            Explore Our <span className="text-primary">Solutions</span>
+          </h2>
+          <div className="mt-2 w-20 h-1 bg-primary mx-auto rounded"></div>
+          <p
+            className="mt-3 text-muted-foreground max-w-2xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay={200}
+          >
+            Innovative platforms tailored for web, mobile, and desktop to help
+            you monitor, analyze, and optimize with ease.
+          </p>
+        </div>
+
+        {products.map((product, index) => (
+          <div key={product.id}>
+            {/* Product Content */}
+            <div
+              ref={product.id === 3 ? product3Ref : null}
+              className={`flex flex-col md:flex-row items-center md:items-center gap-10 ${
+                index % 2 === 1 ? "md:flex-row-reverse" : ""
+              }`}
+              data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
+            >
+              {/* === IMAGE / MOCKUPS === */}
+              <div className="flex-1 flex justify-center relative">
+                {/* Product 1: EMS */}
+                {product.id === 1 && (
+                  <div
+                    className="relative animate-floatY group w-full flex justify-center max-w-7xl mx-auto"
+                    onMouseEnter={startEMSLoop}
+                    onMouseLeave={stopEMSLoop}
+                  >
+                    <div className="hidden lg:block absolute -top-4 -left-4 w-[95%] h-[95%] lg:w-[691px] lg:h-[500px] bg-blue-200 rounded-xl border border-blue-600 shadow-lg opacity-40"></div>
+
+                    <div
+                      className="relative w-full max-w-[600px] lg:w-[700px] lg:max-w-none bg-white rounded-xl shadow-2xl border border-blue-400 overflow-hidden transition-transform duration-700 hover:scale-[1.02]"
+                    >
+                      <div className="flex items-center space-x-1 px-1 py-1 bg-gray-100 border-b border-blue-400 text-xs sm:text-sm h-8 lg:space-x-4 lg:px-3">
+                        <div className="bg-blue-200 px-2 py-1 rounded-t text-gray-900 shadow truncate max-w-[110px] sm:max-w-[140px] lg:max-w-none">
+                          EMS Dashboard
+                        </div>
+                        <div className="px-1 py-1 rounded-t text-gray-600 truncate max-w-[80px] sm:max-w-none">
+                          4D Solutions
+                        </div>
+                        <div className="px-1 py-1 rounded-t text-gray-600 truncate max-w-[65px] sm:max-w-none">
+                          + New Tab
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between px-0 py-2 bg-gray-100 border-b border-gray-300 h-10 text-xs sm:text-sm lg:px-3">
+                        <div className="flex items-center space-x-0.5 text-gray-600 pl-1 lg:space-x-3">
+                          <span className="cursor-pointer hover:text-gray-900">←</span>
+                          <span className="cursor-pointer hover:text-gray-900">→</span>
+                          <span className="cursor-pointer hover:text-gray-900">⟳</span>
+                        </div>
+
+                        <div className="flex-1 mx-1 relative lg:mx-6">
+                          <div className="bg-gray-200 rounded-md px-2 py-1 text-xs text-gray-700 text-center truncate lg:text-sm">
+                            www.4d-solutions.com/dashboard
+                          </div>
+                          <div className="absolute bottom-0 left-0 h-[2px] bg-primary animate-loading-bar"></div>
+                        </div>
+
+                        <div className="flex items-center space-x-1 text-gray-600 pr-0 lg:space-x-3 lg:pr-0">
+                          <span className="cursor-pointer hover:text-gray-900">—</span>
+                          <span className="cursor-pointer hover:text-gray-900">▢</span>
+                          <span className="cursor-pointer hover:text-red-500">✕</span>
+                        </div>
+                      </div>
+
+                      <div
+                        className="relative w-full h-0"
+                        style={{ paddingBottom: "56.25%" }}
+                      >
+                        {emsImages.map((img, idx) => (
+                          <Image
+                            key={idx}
+                            src={img}
+                            alt={`EMS screen ${idx}`}
+                            fill
+                            className={`object-cover absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                              emsIndex === idx ? "opacity-100" : "opacity-0"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+               {/* Product 2: SteriTrack Phones Mockup */} {product.id === 2 && ( <div className="relative w-full flex justify-center py-4 sm:py-8 lg:py-12"> {/* Main Mockup Container - Uses fixed pixels on desktop (lg) but shrinks on mobile */} <div className=" relative w-[380px] h-[400px] /* Mobile Base Size: Reduced to prevent clipping/overflow */ lg:w-[500px] lg:h-[520px] /* Desktop Size: Original large dimensions */ group transition-all duration-300 " > {/* Phone 1: Left */} <div className=" absolute left-2 top-10 w-[160px] h-[330px] /* Mobile Position/Size: Condensed */ lg:left-4 lg:top-16 lg:w-[220px] lg:h-[450px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-xl overflow-hidden rotate-[-7deg] scale-95 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-3 group-hover:-rotate-2 group-hover:scale-100 " > <div className="relative w-full h-full animate-floatY bg-white"> <Image src={product.images?.[0] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> {/* Phone 2: Center (Front) */} <div className=" absolute left-1/2 -translate-x-1/2 top-0 w-[170px] h-[360px] /* Mobile Position/Size: Condensed */ lg:w-[230px] lg:h-[480px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-2xl overflow-hidden z-10 scale-105 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-4 group-hover:scale-110 " > <div className="relative w-full h-full animate-floatY delay-200 bg-white"> <Image src={product.images?.[1] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> {/* Phone 3: Right */} <div className=" absolute right-2 top-12 w-[160px] h-[330px] /* Mobile Position/Size: Condensed */ lg:right-4 lg:top-20 lg:w-[220px] lg:h-[450px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-xl overflow-hidden rotate-[7deg] scale-95 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-3 group-hover:rotate-2 group-hover:scale-100 " > <div className="relative w-full h-full animate-floatY delay-400 bg-white"> <Image src={product.images?.[2] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> </div> </div> )}
+
+                {/* Product 3: Petri Metrics */}
+                {product.id === 3 && (
+                  <div
+                    className="relative animate-floatY w-[90vw] sm:w-[460px] md:w-[680px] lg:w-[720px] xl:w-[740px] h-auto aspect-[17/18] mx-auto md:mx-0 -translate-y-6 md:translate-y-12"
+                    data-aos="zoom-in-up"
+                    data-aos-delay={200}
+                  >
+                    <Image
+                      src="/mockups/moniitor.png"
+                      alt="Monitor Frame"
+                      fill
+                      className="object-contain pointer-events-none select-none z-20"
+                    />
+
+                    <div className="absolute top-[21%] md:top-[20%] left-[5.5%] md:left-[7.5%] w-[89%] md:w-[85%] h-[49%] md:h-[47%] bg-white overflow-hidden z-10 flex flex-col rounded-md">
+                      {/* Splash */}
+                      {showSplash && (
+                        <div
+                          className={`absolute inset-0 flex flex-col items-center justify-center bg-white/90 z-30 transition-opacity duration-300 ${
+                            fadeOut ? "opacity-0" : "opacity-100"
+                          }`}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 100 100"
+                            width="40"
+                            height="40"
+                            className="animate-pulse"
+                          >
+                            <circle cx="50" cy="50" r="48" fill="#1E3A8A" />
+                            <circle cx="35" cy="40" r="6" fill="white" />
+                            <circle cx="55" cy="35" r="6" fill="white" />
+                            <circle cx="42" cy="58" r="6" fill="white" />
+                            <circle cx="62" cy="55" r="6" fill="white" />
+                          </svg>
+                          <p className="text-gray-700 text-xs md:text-sm tracking-widest animate-pulse mt-2">
+                            Loading...
+                          </p>
+                          <div className="mt-2 w-32 md:w-48 h-1 bg-gray-200 rounded-full overflow-hidden">
+                            <div className="h-full w-1/3 bg-primary animate-loading-barr"></div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Title Bar */}
+                      <div className="flex justify-between items-center bg-gray-100 text-gray-800 px-2 md:px-3 py-1 border-b border-gray-300 text-xs md:text-sm">
+                        <div className="flex items-center space-x-2 md:space-x-6">
+                          <span className="font-semibold text-gray-900">
+                            PetriMetrics
+                          </span>
+                          <span className="hover:text-gray-900 cursor-default hidden md:inline">
+                            File
+                          </span>
+                          <span className="hover:text-gray-900 cursor-default hidden md:inline">
+                            Edit
+                          </span>
+                          <span className="hover:text-gray-900 cursor-default hidden md:inline">
+                            View
+                          </span>
+                          <span className="hover:text-gray-900 cursor-default hidden md:inline">
+                            Help
+                          </span>
+                        </div>
+
+                        <div className="flex items-center space-x-1">
+                          <button
+                            className="w-7 h-6 flex items-center justify-center hover:bg-gray-200 rounded transition"
+                            title="Minimize"
+                          >
+                            <span className="text-gray-700 text-base">—</span>
+                          </button>
+                          <button
+                            className="w-7 h-6 flex items-center justify-center hover:bg-gray-200 rounded transition"
+                            title="Maximize"
+                          >
+                            <span className="text-gray-700 text-xs">▢</span>
+                          </button>
+                          <button
+                            className="w-7 h-6 flex items-center justify-center hover:bg-red-500 rounded transition group"
+                            title="Close"
+                          >
+                            <span className="text-gray-700 text-sm group-hover:text-white">
+                              ✕
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Dashboard */}
+                      <div className="relative w-full aspect-video">
+                        <Image
+                          src={product.image || ""}
+                          alt={product.title}
+                          fill
+                          className="object-cover object-top bg-white"
+                        />
+                      </div>
+
+                      {/* Status */}
+                      <div className="px-2 md:px-4 py-1 bg-gray-100 text-gray-600 text-[10px] md:text-xs border-t border-gray-300 flex justify-between">
+                        <span>Connected • All Sensors Active</span>
+                        <span>{currentTime}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* === TEXT === */}
+              <div className="flex-1" data-aos="fade-up" data-aos-delay={200}>
+                <h3 className="text-2xl font-bold mb-4">{product.title}</h3>
+                <p className="text-gray-600 mb-6">{product.description}</p>
+                <ul className="space-y-4 mb-6">
+                  {product.features.map((feature, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-center gap-3 hover:text-primary transition-colors"
+                      data-aos="fade-up"
+                      data-aos-delay={100 * (idx + 1)}
+                    >
+                      <span className="text-primary">✔</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  className="px-6 py-2 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-primary/90 transition-colors"
+                  data-aos="zoom-in"
+                  data-aos-delay={100}
+                >
+                  Learn More
+                </button>
+                {product.id === 1 && <div className="mt-20"></div>}
+              </div>
+            </div>
+
+            {/* LOTTIE ANIMATION */}
+            {product.id === 1 && (
+              <div
+                className="w-full py-8 my-8 flex justify-start"
+                data-aos="fade"
+                data-aos-delay={300}
+              >
+                <div className="w-full max-w-[600px] lg:max-w-[700px] ml-0">
+                <LottiePlayer
+  loop={false}
+  src={LOTTIE_LINES_URL}
+  style={{ width: "100%", height: "200px" }}
+  lottieRef={(instance) => {
+    if (instance) {
+      // play once and stop at last frame
+      instance.goToAndStop(0, true); // start at first frame
+      instance.play();
+      instance.addEventListener("complete", () => {
+        const lastFrame = instance.getDuration(true);
+        instance.goToAndStop(lastFrame, true);
+      });
+    }
+  }}
+/>
+
+                </div>
+              </div>
+            )}
+
+
+
+
+{/* LOTTIE ANIMATION AFTER PRODUCT 2 */}
+{product.id === 2 && (
+  <div
+    className="w-full py-8 my-8 flex justify-end"
+    data-aos="fade"
+    data-aos-delay={300}
+  >
+    <div className="w-full max-w-[600px] lg:max-w-[700px] mr-0 transform -scale-x-100">
+      <LottiePlayer
+        loop={false}
+        src={LOTTIE_LINES_URL}
+        style={{ width: "100%", height: "200px" }}
+        lottieRef={(instance) => {
+          if (instance) {
+            instance.goToAndStop(0, true); // start at first frame
+            instance.play();
+            instance.addEventListener("complete", () => {
+              const lastFrame = instance.getDuration(true);
+              instance.goToAndStop(lastFrame, true);
+            });
+          }
+        }}
+      />
+    </div>
+  </div>
+)}
+
+
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}

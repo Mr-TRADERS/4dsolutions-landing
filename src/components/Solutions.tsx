@@ -264,7 +264,7 @@ export default function SolutionsAlternating() {
                 {/* Product 3: Petri Metrics */}
                 {product.id === 3 && (
                   <div
-                    className="relative animate-floatY w-[90vw] sm:w-[460px] md:w-[680px] lg:w-[720px] xl:w-[740px] h-auto aspect-[17/18] mx-auto md:mx-0 -translate-y-6 md:translate-y-12"
+                  className="relative animate-floatY w-[90vw] sm:w-[460px] md:w-[680px] lg:w-[720px] xl:w-[740px] h-auto aspect-[17/18] mx-auto md:mx-0 -translate-y-28 md:-translate-y-10"
                     data-aos="zoom-in-up"
                     data-aos-delay={200}
                   >
@@ -370,7 +370,14 @@ export default function SolutionsAlternating() {
               </div>
 
               {/* === TEXT === */}
-              <div className="flex-1" data-aos="fade-up" data-aos-delay={200}>
+              <div
+  className={`flex-1 ${
+    product.id === 3 ? "-translate-y-20 md:-translate-y-22" : ""
+  }`}
+  data-aos="fade-up"
+  data-aos-delay={200}
+>
+
                 <h3 className="text-2xl font-bold mb-4">{product.title}</h3>
                 <p className="text-gray-600 mb-6">{product.description}</p>
                 <ul className="space-y-4 mb-6">
@@ -400,9 +407,9 @@ export default function SolutionsAlternating() {
             {/* LOTTIE ANIMATION */}
             {product.id === 1 && (
               <div
-                className="w-full py-8 my-8 flex justify-start"
+                className="w-full py-10 my-10 flex justify-start"
                 data-aos="fade"
-                data-aos-delay={300}
+                data-aos-delay={500}
               >
                 <div className="w-full max-w-[600px] lg:max-w-[700px] ml-0">
                 <LottiePlayer
@@ -432,9 +439,9 @@ export default function SolutionsAlternating() {
 {/* LOTTIE ANIMATION AFTER PRODUCT 2 */}
 {product.id === 2 && (
   <div
-    className="w-full py-8 my-8 flex justify-end"
+    className="w-full py-2 my-2 flex justify-end"
     data-aos="fade"
-    data-aos-delay={300}
+    data-aos-delay={800}
   >
     <div className="w-full max-w-[600px] lg:max-w-[700px] mr-0 transform -scale-x-100">
       <LottiePlayer

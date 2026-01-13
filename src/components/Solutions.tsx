@@ -18,6 +18,7 @@ const LOTTIE_LINES_URL = "/anims/lines.json";
 const products = [
   {
     id: 1,
+    slug: "eco-track-pro",
     title: "EcoTrack PRO",
     description:
       "A comprehensive web-based platform designed for real-time monitoring, reporting, and compliance management of critical environmental data.",
@@ -28,10 +29,11 @@ const products = [
       "Data Visualization Dashboards",
       "User Role Management",
     ],
-    image: "/EMS/ems11.jpeg",
+    image: "/ecotrackpro/Capture1.png",
   },
   {
     id: 2,
+    slug: "steritrack",
     title: "SteriTrack",
     description:
       "SteriTrack is a smart app for real-time sterilization monitoring, providing live temperature data and complete cycle records directly from your autoclaves.",
@@ -50,6 +52,7 @@ const products = [
   },
   {
     id: 3,
+    slug: "petri-metrics",
     title: "Petri Metrics",
     description:
       "Zone Reader is an AI tool that measures inhibition zones on assay plates with precision, easy verification, and USP81 compliance.",
@@ -76,12 +79,12 @@ export default function SolutionsAlternating() {
   const emsIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const emsImages = [
-    "/EMS/ems11.jpeg",
-    "/EMS/Login.png",
-    "/EMS/Login2.png",
-    "/EMS/ems2.jpeg",
-    "/EMS/ems3.jpeg",
-    "/EMS/ems4.jpeg",
+    "/ecotrackpro/Capture18.png",
+    "/ecotrackpro/Capture2.png",
+    "/ecotrackpro/Capture6.png",
+    "/ecotrackpro/Capture15.png",
+    "/ecotrackpro/Capture18.png",
+    "/ecotrackpro/Capture20.png",
   ];
 
   const startEMSLoop = () => {
@@ -208,7 +211,7 @@ export default function SolutionsAlternating() {
                     >
                       <div className="flex items-center space-x-1 px-1 py-1 bg-gray-100 border-b border-blue-400 text-xs sm:text-sm h-8 lg:space-x-4 lg:px-3">
                         <div className="bg-blue-200 px-2 py-1 rounded-t text-gray-900 shadow truncate max-w-[110px] sm:max-w-[140px] lg:max-w-none">
-                          EMS Dashboard
+                          ETPro Dashboard
                         </div>
                         <div className="px-1 py-1 rounded-t text-gray-600 truncate max-w-[80px] sm:max-w-none">
                           4D Solutions
@@ -240,26 +243,26 @@ export default function SolutionsAlternating() {
                       </div>
 
                       <div
-                        className="relative w-full h-0"
-                        style={{ paddingBottom: "56.25%" }}
+                        className="relative w-full h-0 bg-[#0b1120]"
+                        style={{ paddingBottom: "54%" }}
                       >
                         {emsImages.map((img, idx) => (
-                          <Image
-                            key={idx}
-                            src={img}
-                            alt={`EMS screen ${idx}`}
-                            fill
-                            className={`object-cover absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                              emsIndex === idx ? "opacity-100" : "opacity-0"
-                            }`}
-                          />
+                        <Image
+                        key={idx}
+                        src={img}
+                        alt={`EMS screen ${idx}`}
+                        fill
+                        className={`object-contain object-top rounded-b-lg absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                          emsIndex === idx ? "opacity-100" : "opacity-0"
+                        }`}
+                      />
                         ))}
                       </div>
                     </div>
                   </div>
                 )}
 
-               {/* Product 2: SteriTrack Phones Mockup */} {product.id === 2 && ( <div className="relative w-full flex justify-center py-4 sm:py-8 lg:py-12"> {/* Main Mockup Container - Uses fixed pixels on desktop (lg) but shrinks on mobile */} <div className=" relative w-[380px] h-[400px] /* Mobile Base Size: Reduced to prevent clipping/overflow */ lg:w-[500px] lg:h-[520px] /* Desktop Size: Original large dimensions */ group transition-all duration-300 " > {/* Phone 1: Left */} <div className=" absolute left-2 top-10 w-[160px] h-[330px] /* Mobile Position/Size: Condensed */ lg:left-4 lg:top-16 lg:w-[220px] lg:h-[450px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-xl overflow-hidden rotate-[-7deg] scale-95 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-3 group-hover:-rotate-2 group-hover:scale-100 " > <div className="relative w-full h-full animate-floatY bg-white"> <Image src={product.images?.[0] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> {/* Phone 2: Center (Front) */} <div className=" absolute left-1/2 -translate-x-1/2 top-0 w-[170px] h-[360px] /* Mobile Position/Size: Condensed */ lg:w-[230px] lg:h-[480px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-2xl overflow-hidden z-10 scale-105 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-4 group-hover:scale-110 " > <div className="relative w-full h-full animate-floatY delay-200 bg-white"> <Image src={product.images?.[1] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> {/* Phone 3: Right */} <div className=" absolute right-2 top-12 w-[160px] h-[330px] /* Mobile Position/Size: Condensed */ lg:right-4 lg:top-20 lg:w-[220px] lg:h-[450px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-xl overflow-hidden rotate-[7deg] scale-95 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-3 group-hover:rotate-2 group-hover:scale-100 " > <div className="relative w-full h-full animate-floatY delay-400 bg-white"> <Image src={product.images?.[2] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> </div> </div> )}
+               {/* Product 2: SteriTrack Phones Mockup */} {product.id === 2 && ( <div className="relative w-full flex justify-center py-4 sm:py-8 lg:py-12"> {/* Main Mockup Container - Uses fixed pixels on desktop (lg) but shrinks on mobile */} <div className=" relative w-[380px] h-[400px] /* Mobile Base Size: Reduced to prevent clipping/overflow */ lg:w-[500px] lg:h-[520px] /* Desktop Size: Original large dimensions */ group transition-all duration-300 " > {/* Phone 1: Left */} <div className=" absolute left-2 top-10 w-[160px] h-[330px] /* Mobile Position/Size: Condensed */ lg:left-4 lg:top-16 lg:w-[220px] lg:h-[450px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-xl overflow-hidden rotate-[-7deg] scale-95 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-3 group-hover:-rotate-2 group-hover:scale-100 " > <div className="relative w-full h-full animate-floatY bg-white"> <Image src={product.images?.[0] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> {/* Phone 2: Center (Front) */} <div className=" absolute left-1/2 -translate-x-1/2 top-0 w-[170px] h-[360px] /* Mobile Position/Size: Condensed */ lg:w-[230px] lg:h-[460px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-2xl overflow-hidden z-10 scale-105 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-4 group-hover:scale-110 " > <div className="relative w-full h-full animate-floatY delay-200 bg-white"> <Image src={product.images?.[1] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> {/* Phone 3: Right */} <div className=" absolute right-2 top-12 w-[160px] h-[330px] /* Mobile Position/Size: Condensed */ lg:right-4 lg:top-20 lg:w-[220px] lg:h-[450px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-xl overflow-hidden rotate-[7deg] scale-95 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-3 group-hover:rotate-2 group-hover:scale-100 " > <div className="relative w-full h-full animate-floatY delay-400 bg-white"> <Image src={product.images?.[2] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> </div> </div> )}
 
                 {/* Product 3: Petri Metrics */}
                 {product.id === 3 && (
@@ -394,12 +397,16 @@ export default function SolutionsAlternating() {
                   ))}
                 </ul>
                 <button
-                  className="px-6 py-2 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-primary/90 transition-colors"
-                  data-aos="zoom-in"
-                  data-aos-delay={100}
-                >
-                  Learn More
-                </button>
+  onClick={() =>
+    window.open(`/products/${product.slug}`, "_blank", "noopener,noreferrer")
+  }
+  className="px-6 py-2 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-primary/90 transition-colors"
+  data-aos="zoom-in"
+  data-aos-delay={100}
+>
+  Learn More
+</button>
+
                 {product.id === 1 && <div className="mt-20"></div>}
               </div>
             </div>

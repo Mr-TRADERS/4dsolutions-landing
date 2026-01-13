@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ArrowUp } from "lucide-react";
 import dynamic from 'next/dynamic'; 
+import { BadgeCheck, Globe, ShieldCheck } from "lucide-react";
+
 
 // DYNAMIC IMPORT FIX
 const LottiePlayer = dynamic(
@@ -15,6 +17,7 @@ const LOTTIE_WAVE_URL = "/anims/WaveLinesAnimation.json";
 
 const PRIMARY_COLOR = "#1e9df1";
 const SECONDARY_COLOR = "#0ea5e9";
+const PRIMARY_COLOR_TWO = "#0077e6"; // Your new darker button color
 
 const HeroSection: React.FC = () => {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -294,71 +297,76 @@ const HeroSection: React.FC = () => {
             >
               {/* Buttons (No Changes) */}
               <button
-                onClick={() => handleScroll("solutions")}
-                className="relative px-6 sm:px-8 py-3 sm:py-4 font-bold rounded-xl text-white overflow-hidden group transition-all duration-500 ease-out transform hover:scale-105 text-base sm:text-lg"
-              >
-                {/* Animated Blue Gradient Border */}
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
-                <div className="absolute inset-[2px] rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 group-hover:from-blue-600 group-hover:to-blue-700 transition-all duration-500"></div>
-                
-                {/* Shine effect overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out"></div>
-                
-                {/* Button text */}
-                <span className="relative z-10 transition-all duration-300 group-hover:tracking-wider">
-                  Explore Solutions
-                </span>
-              </button>
+  onClick={() => handleScroll("solutions")}
+  className="relative px-6 sm:px-8 py-3 sm:py-4 font-bold rounded-xl text-white overflow-hidden group transition-all duration-500 ease-out transform hover:scale-105 text-base sm:text-lg shadow-xl"
+  style={{ 
+    // This blends your two colors from top to bottom
+    background: `linear-gradient(135deg, ${PRIMARY_COLOR} 0%, ${PRIMARY_COLOR_TWO} 100%)` 
+  }}
+>
+  {/* Shine effect (keep this, it looks great on gradients) */}
+  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out"></div>
+  
+  {/* Hover overlay: makes the whole button brighten slightly */}
+  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-              <button
-                onClick={() => handleScroll("about")}
-                className="relative px-6 sm:px-8 py-3 sm:py-4 font-bold rounded-xl overflow-hidden group transition-all duration-500 ease-out transform hover:scale-105 text-base sm:text-lg"
-              >
-                {/* Animated Blue Gradient Border */}
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
-                <div className="absolute inset-[2px] rounded-xl bg-white"></div>
-                
-                {/* Text with blue gradient */}
-                <span className="relative z-10 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent group-hover:from-blue-500 group-hover:to-blue-700 transition-all duration-300 group-hover:tracking-wider">
-                  Learn More
-                </span>
-                
-                {/* Arrow icon animation */}
-                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
-                  <svg className="w-4 h-4 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </button>
+  <span className="relative z-10 transition-all duration-300 group-hover:tracking-wider">
+    Explore Solutions
+  </span>
+</button>
+
+<button
+  onClick={() => handleScroll("about")}
+  className="relative px-6 sm:px-8 py-3 sm:py-4 font-bold rounded-xl overflow-hidden group transition-all duration-500 ease-out transform hover:scale-105 text-base sm:text-lg border-2 border-blue-500 hover:border-blue-600"
+>
+  {/* Text with blue gradient */}
+  <span className="relative z-10 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent group-hover:from-blue-500 group-hover:to-blue-700 transition-all duration-300 group-hover:tracking-wider">
+    Learn More
+  </span>
+  
+  {/* Arrow icon animation */}
+  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
+    <svg className="w-4 h-4 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+    </svg>
+  </div>
+</button>
             </div>
 
             {/* Feature badges (No Changes) */}
-            <div
-              className="flex flex-wrap gap-4 mt-4 justify-center lg:justify-start font-[var(--font-geist-sans)]"
-              data-aos="fade-up"
-              data-aos-delay="800"
-            >
-              <div className="relative group">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
-                <span className="relative flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent">
-                  <span className="relative z-10">✅ Industry Expertise</span>
-                </span>
-              </div>
-              
-              <div className="relative group">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
-                <span className="relative flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent">
-                  <span className="relative z-10">🌐 Global Reach</span>
-                </span>
-              </div>
-              
-              <div className="relative group">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
-                <span className="relative flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent">
-                  <span className="relative z-10">🔒 Compliance-Driven</span>
-                </span>
-              </div>
-            </div>
+            {/* Feature badges */}
+<div
+  className="flex flex-wrap gap-2 sm:gap-3 mt-6 justify-center lg:justify-start font-[var(--font-geist-sans)]"
+  data-aos="fade-up"
+  data-aos-delay="800"
+>
+  {/* Badge 1 */}
+  <div className="relative group whitespace-nowrap">
+    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
+    <span className="relative flex items-center gap-2 px-3 py-2 rounded-full bg-primary/10 text-primary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent text-sm sm:text-base">
+      <BadgeCheck className="w-5 h-5" />
+      Industry Expertise
+    </span>
+  </div>
+
+  {/* Badge 2 */}
+  <div className="relative group whitespace-nowrap">
+    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
+    <span className="relative flex items-center gap-2 px-3 py-2 rounded-full bg-primary/10 text-primary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent text-sm sm:text-base">
+      <Globe className="w-5 h-5" />
+      Global Reach
+    </span>
+  </div>
+
+  {/* Badge 3 */}
+  <div className="relative group whitespace-nowrap">
+    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
+    <span className="relative flex items-center gap-2 px-3 py-2 rounded-full bg-primary/10 text-primary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent text-sm sm:text-base">
+      <ShieldCheck className="w-5 h-5" />
+      Compliance-Driven
+    </span>
+  </div>
+</div>
           </div>
 
           {/* Right Cube (No Changes) */}

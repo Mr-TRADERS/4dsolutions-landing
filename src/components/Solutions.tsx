@@ -29,7 +29,7 @@ const products = [
       "Data Visualization Dashboards",
       "User Role Management",
     ],
-    image: "/ecotrackpro/Capture1.png",
+    image: "/ecotrackpro/capture1.png",
   },
   {
     id: 2,
@@ -79,12 +79,12 @@ export default function SolutionsAlternating() {
   const emsIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const emsImages = [
-    "/ecotrackpro/Capture18.png",
-    "/ecotrackpro/Capture2.png",
-    "/ecotrackpro/Capture6.png",
-    "/ecotrackpro/Capture15.png",
-    "/ecotrackpro/Capture18.png",
-    "/ecotrackpro/Capture20.png",
+    "/ecotrackpro/capture18.png",
+    "/ecotrackpro/capture2.png",
+    "/ecotrackpro/capture6.png",
+    "/ecotrackpro/capture15.png",
+    "/ecotrackpro/capture18.png",
+    "/ecotrackpro/capture20.png",
   ];
 
   const startEMSLoop = () => {

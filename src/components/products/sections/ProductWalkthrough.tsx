@@ -8,7 +8,7 @@ const screens = [
     id: 'dashboard',
     title: 'Real-Time Dashboard',
     icon: BarChart3,
-    image: '/ecotrackpro/Capture18.png',
+    image: '/ecotrackpro/capture18.png',
     description: 'Comprehensive dark-mode interface for live monitoring of critical environmental parameters.',
     benefit:
       'Instantly identify deviations across multiple metrics with color-coded status indicators (Normal, High Alarm, Low Alarm).',
@@ -23,7 +23,7 @@ const screens = [
     id: 'sensor',
     title: 'Sensor Status Overview',
     icon: FileText,
-    image: '/ecotrackpro/Capture1.png', // Update this path to your actual sensor status image
+    image: '/ecotrackpro/capture1.png', // Update this path to your actual sensor status image
     description:
       'Detailed monitoring of specific zones and cleanroom environments.',
     benefit:
@@ -39,7 +39,7 @@ const screens = [
     id: 'historical',
     title: 'Historical Data & Trends',
     icon: AlertTriangle,
-    image: '/ecotrackpro/Capture27.png', // Update to your data logs image path
+    image: '/ecotrackpro/capture27.png', // Update to your data logs image path
     description:
       'Advanced sensor data logs with multi-parameter filtering and pivoted views.',
     benefit:
@@ -56,7 +56,7 @@ const screens = [
     id: 'compliance',
     title: 'Compliance Reports',
     icon: Users,
-    image: '/ecotrackpro/Capture6.png', // Update to your Report Builder image path
+    image: '/ecotrackpro/capture6.png', // Update to your Report Builder image path
     description:
       'Step-by-step custom report builder with advanced data aggregation and visualization options.',
     benefit:
@@ -72,7 +72,7 @@ const screens = [
     id: 'audit',
     title: 'Audit Logs',
     icon: Settings,
-    image: '/ecotrackpro/Capture2.png', // Update to your Audit Trail image path
+    image: '/ecotrackpro/capture2.png', // Update to your Audit Trail image path
     description:
       'Comprehensive tracking of all system changes, user activities, and data interactions.',
     benefit:
@@ -89,7 +89,7 @@ const screens = [
     id: 'floor-mapping',
     title: 'Floor Mapping',
     icon: Map,
-    image: '/ecotrackpro/Capture26.png', // Update to your Floor Map image path
+    image: '/ecotrackpro/capture26.png', // Update to your Floor Map image path
     description:
       'Spatial visualization of real-time environmental data across your facility layout.',
     benefit:
@@ -105,7 +105,7 @@ const screens = [
     id: 'database-management',
     title: 'Database Management',
     icon: Database,
-    image: '/ecotrackpro/Capture13.png', // Update to your Database Management image path
+    image: '/ecotrackpro/capture13.png', // Update to your Database Management image path
     description:
       'Secure backup and restoration control center for critical environmental data.',
     benefit:

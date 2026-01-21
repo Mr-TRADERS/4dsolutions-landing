@@ -351,6 +351,14 @@ body, html {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-600 to-blue-700;
 }
 
+.gradient-bg {
+  /* This applies the gradient to the background of the container */
+  @apply bg-gradient-to-r from-primary via-blue-600 to-blue-700;
+  
+  /* Optional: Ensure text is readable against the blue gradient */
+  @apply text-white; 
+}
+
 .glass-card {
   @apply bg-white/90 backdrop-blur-xl border border-white/50 shadow-lg;
 }

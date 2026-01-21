@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from 'react';
-import { ChevronRight, FileText, CheckSquare, AlertTriangle, BarChart3, Settings, Users, Map, Database } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronRight, ChevronLeft, FileText, AlertTriangle, BarChart3, Settings, Users, Map, Database, Play, Pause, X, Maximize2, ExternalLink } from 'lucide-react';
 
 const screens = [
   {
@@ -23,7 +23,7 @@ const screens = [
     id: 'sensor',
     title: 'Sensor Status Overview',
     icon: FileText,
-    image: '/ecotrackpro/capture1.png', // Update this path to your actual sensor status image
+    image: '/ecotrackpro/capture1.png',
     description:
       'Detailed monitoring of specific zones and cleanroom environments.',
     benefit:
@@ -39,7 +39,7 @@ const screens = [
     id: 'historical',
     title: 'Historical Data & Trends',
     icon: AlertTriangle,
-    image: '/ecotrackpro/capture27.png', // Update to your data logs image path
+    image: '/ecotrackpro/capture27.png',
     description:
       'Advanced sensor data logs with multi-parameter filtering and pivoted views.',
     benefit:
@@ -51,12 +51,11 @@ const screens = [
       'Instant identification of High/Low alarm events in audit history',
     ],
   },
-
   {
     id: 'compliance',
     title: 'Compliance Reports',
     icon: Users,
-    image: '/ecotrackpro/capture6.png', // Update to your Report Builder image path
+    image: '/ecotrackpro/capture6.png',
     description:
       'Step-by-step custom report builder with advanced data aggregation and visualization options.',
     benefit:
@@ -72,7 +71,7 @@ const screens = [
     id: 'audit',
     title: 'Audit Logs',
     icon: Settings,
-    image: '/ecotrackpro/capture2.png', // Update to your Audit Trail image path
+    image: '/ecotrackpro/capture2.png',
     description:
       'Comprehensive tracking of all system changes, user activities, and data interactions.',
     benefit:
@@ -84,12 +83,11 @@ const screens = [
       'Entity-level tracking (Users, Reports, Locations, and DataModules)',
     ],
   },
-  /* --- New Options Added Below --- */
   {
     id: 'floor-mapping',
     title: 'Floor Mapping',
     icon: Map,
-    image: '/ecotrackpro/capture26.png', // Update to your Floor Map image path
+    image: '/ecotrackpro/capture26.png',
     description:
       'Spatial visualization of real-time environmental data across your facility layout.',
     benefit:
@@ -105,7 +103,7 @@ const screens = [
     id: 'database-management',
     title: 'Database Management',
     icon: Database,
-    image: '/ecotrackpro/capture13.png', // Update to your Database Management image path
+    image: '/ecotrackpro/capture13.png',
     description:
       'Secure backup and restoration control center for critical environmental data.',
     benefit:
@@ -121,6 +119,47 @@ const screens = [
 
 export const ProductWalkthrough = () => {
   const [activeScreen, setActiveScreen] = useState(screens[0]);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [animateFeatures, setAnimateFeatures] = useState(false);
+
+  const currentIndex = screens.findIndex(s => s.id === activeScreen.id);
+
+  // Auto-play functionality
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isAutoPlaying) {
+      interval = setInterval(() => {
+        setActiveScreen(prev => {
+          const currentIdx = screens.findIndex(s => s.id === prev.id);
+          const nextIdx = (currentIdx + 1) % screens.length;
+          return screens[nextIdx];
+        });
+      }, 4000); // Change screen every 4 seconds
+    }
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
+
+  // Animate features when screen changes
+  useEffect(() => {
+    setAnimateFeatures(false);
+    const timer = setTimeout(() => setAnimateFeatures(true), 100);
+    return () => clearTimeout(timer);
+  }, [activeScreen.id]);
+
+  const goToNext = () => {
+    const nextIdx = (currentIndex + 1) % screens.length;
+    setActiveScreen(screens[nextIdx]);
+  };
+
+  const goToPrev = () => {
+    const prevIdx = currentIndex === 0 ? screens.length - 1 : currentIndex - 1;
+    setActiveScreen(screens[prevIdx]);
+  };
+
+  const toggleAutoPlay = () => {
+    setIsAutoPlaying(!isAutoPlaying);
+  };
 
   return (
     <section className="section-padding bg-gray-50 relative overflow-hidden">
@@ -134,57 +173,125 @@ export const ProductWalkthrough = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Every Feature, <span className="gradient-text">Explained</span>
           </h2>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground mb-6">
             Explore each major component of QualityFlow Pro and understand how it transforms your quality operations.
           </p>
+          
+          {/* Auto-play tour button */}
+          <button
+            onClick={toggleAutoPlay}
+            className="inline-flex items-center gap-2 px-6 py-3 gradient-bg bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            {isAutoPlaying ? (
+              <>
+                <Pause className="w-5 h-5" />
+                Pause Tour
+              </>
+            ) : (
+              <>
+                <Play className="w-5 h-5" />
+                Start Guided Tour
+              </>
+            )}
+          </button>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-8">
           {/* Sidebar navigation */}
-<div className="lg:col-span-4 space-y-3">
-  {screens.map((screen) => (
-    <button
-      key={screen.id}
-      onClick={() => setActiveScreen(screen)}
-      /* Update the line below to include cursor-pointer */
-      className={`w-full flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300 cursor-pointer ${
-        activeScreen.id === screen.id
-          ? 'bg-blue-50 shadow-sm border-l-4 border-blue-600'
-          : 'bg-white hover:bg-gray-50 border-l-4 border-transparent'
-      }`}
-    >
-      <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
-        activeScreen.id === screen.id ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'
-      }`}>
-        <screen.icon className="w-5 h-5" />
-      </div>
-      <div className="flex-1">
-        <h4 className="font-semibold text-gray-900">{screen.title}</h4>
-        <p className="text-sm text-gray-600 line-clamp-1">{screen.description}</p>
-      </div>
-      <ChevronRight className={`w-5 h-5 transition-transform ${
-        activeScreen.id === screen.id ? 'text-blue-600' : 'text-gray-400'
-      }`} />
-    </button>
-  ))}
-</div>
+          <div className="lg:col-span-4 space-y-3">
+            {screens.map((screen) => (
+              <button
+                key={screen.id}
+                onClick={() => {
+                  setActiveScreen(screen);
+                  setIsAutoPlaying(false);
+                }}
+                className={`w-full flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300 cursor-pointer ${
+                  activeScreen.id === screen.id
+                    ? 'bg-blue-50 shadow-sm border-l-4 border-blue-600 scale-[1.02]'
+                    : 'bg-white hover:bg-gray-50 border-l-4 border-transparent hover:scale-[1.01]'
+                }`}
+              >
+                <div className={`gradient-bg w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
+                  activeScreen.id === screen.id ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'
+                }`}>
+                  <screen.icon className="w-5 h-5" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-gray-900">{screen.title}</h4>
+                  <p className="text-sm text-gray-600 line-clamp-1">{screen.description}</p>
+                </div>
+                <ChevronRight className={`w-5 h-5 transition-transform ${
+                  activeScreen.id === screen.id ? 'text-blue-600 translate-x-1' : 'text-gray-400'
+                }`} />
+              </button>
+            ))}
+          </div>
 
           {/* Content area */}
           <div className="lg:col-span-8">
             <div className="glass-card rounded-3xl overflow-hidden">
-              {/* Screenshot - now shows actual images when available */}
-              <div className="aspect-video bg-gradient-to-br from-blue-100 via-white to-blue-50 relative">
+              {/* Screenshot with navigation */}
+              <div className="aspect-video bg-gradient-to-br from-blue-100 via-white to-blue-50 relative group">
                 {activeScreen.image ? (
                   <>
+                    {/* Image with fade transition */}
                     <img
+                      key={activeScreen.id}
                       src={activeScreen.image}
                       alt={activeScreen.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain transition-opacity duration-500 animate-in fade-in"
                     />
-                    <div className="absolute top-4 left-4 flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-400" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                      <div className="w-3 h-3 rounded-full bg-green-400" />
+                    
+                    {/* Floating label at bottom */}
+                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
+                      <div className="bg-white/95 backdrop-blur-md shadow-lg rounded-full px-6 py-2.5 border border-gray-200/50">
+                        <span className="text-sm font-semibold text-gray-800">{activeScreen.title}</span>
+                      </div>
+                    </div>
+
+                    {/* Navigation arrows - show on hover */}
+                    <button
+                      onClick={goToPrev}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110 z-20"
+                      aria-label="Previous screen"
+                    >
+                      <ChevronLeft className="w-6 h-6 text-gray-800" />
+                    </button>
+                    <button
+                      onClick={goToNext}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110 z-20"
+                      aria-label="Next screen"
+                    >
+                      <ChevronRight className="w-6 h-6 text-gray-800" />
+                    </button>
+
+                    {/* Fullscreen button - show on hover */}
+                    <button
+                      onClick={() => setIsFullscreen(true)}
+                      className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110 z-20"
+                      aria-label="View fullscreen"
+                    >
+                      <Maximize2 className="w-5 h-5 text-gray-800" />
+                    </button>
+
+                    {/* Progress dots */}
+                    <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                      {screens.map((screen, idx) => (
+                        <button
+                          key={screen.id}
+                          onClick={() => {
+                            setActiveScreen(screen);
+                            setIsAutoPlaying(false);
+                          }}
+                          className={`transition-all duration-300 rounded-full ${
+                            activeScreen.id === screen.id
+                              ? 'w-8 h-2 bg-blue-600'
+                              : 'w-2 h-2 bg-gray-400 hover:bg-gray-600'
+                          }`}
+                          aria-label={`Go to ${screen.title}`}
+                        />
+                      ))}
                     </div>
                   </>
                 ) : (
@@ -200,31 +307,88 @@ export const ProductWalkthrough = () => {
                 )}
               </div>
 
-             {/* Details */}
-      <div className="p-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-3">{activeScreen.title}</h3>
-        <p className="text-gray-600 mb-6">{activeScreen.description}</p>
-        
-        <div className="bg-blue-50 rounded-lg p-4 mb-6 border-l-4 border-blue-600">
-          <p className="text-blue-700 text-sm">
-            <strong>Key Benefit:</strong> {activeScreen.benefit}
-          </p>
-        </div>
+              {/* Details */}
+              <div className="p-8">
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="text-2xl font-bold text-gray-900">{activeScreen.title}</h3>
+                  {/* Try It Live Button */}
+                  <a
+                    href="#demo"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-sm transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105"
+                  >
+                    Try It Live
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+                <p className="text-gray-600 mb-6">{activeScreen.description}</p>
+                
+                <div className="bg-blue-50 rounded-lg p-4 mb-6 border-l-4 border-blue-600">
+                  <p className="text-blue-700 text-sm">
+                    <strong>Key Benefit:</strong> {activeScreen.benefit}
+                  </p>
+                </div>
 
-        <h4 className="font-semibold text-gray-900 mb-4">Core Capabilities:</h4>
-        <ul className="grid sm:grid-cols-2 gap-3">
-          {activeScreen.features.map((feature, i) => (
-            <li key={i} className="flex items-start gap-2">
-              <ChevronRight className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
-              <span className="text-sm text-gray-700">{feature}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+                <h4 className="font-semibold text-gray-900 mb-4">Core Capabilities:</h4>
+                <ul className="grid sm:grid-cols-2 gap-3">
+                  {activeScreen.features.map((feature, i) => (
+                    <li 
+                      key={i} 
+                      className={`flex items-start gap-2 transition-all duration-300 ${
+                        animateFeatures 
+                          ? 'opacity-100 translate-x-0' 
+                          : 'opacity-0 -translate-x-4'
+                      }`}
+                      style={{ transitionDelay: `${i * 100}ms` }}
+                    >
+                      <ChevronRight className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
+                      <span className="text-sm text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Fullscreen Modal */}
+      {isFullscreen && (
+        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+          <button
+            onClick={() => setIsFullscreen(false)}
+            className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300"
+            aria-label="Close fullscreen"
+          >
+            <X className="w-6 h-6 text-white" />
+          </button>
+          
+          <div className="max-w-7xl w-full">
+            <img
+              src={activeScreen.image}
+              alt={activeScreen.title}
+              className="w-full h-auto max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            />
+            <div className="text-center mt-6">
+              <h3 className="text-2xl font-bold text-white mb-2">{activeScreen.title}</h3>
+              <p className="text-gray-300">{activeScreen.description}</p>
+            </div>
+          </div>
+
+          {/* Fullscreen navigation */}
+          <button
+            onClick={goToPrev}
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300"
+          >
+            <ChevronLeft className="w-7 h-7 text-white" />
+          </button>
+          <button
+            onClick={goToNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300"
+          >
+            <ChevronRight className="w-7 h-7 text-white" />
+          </button>
+        </div>
+      )}
     </section>
   );
 };

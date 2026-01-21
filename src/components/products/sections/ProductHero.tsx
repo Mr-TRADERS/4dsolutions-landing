@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/products/ui/button";
-import { ArrowRight, Play, Activity, Thermometer, Shield } from 'lucide-react';
+import { ArrowRight, Play, History, Thermometer, ShieldCheck } from 'lucide-react';
 
 interface ProductHeroProps {
   badge: string;
@@ -139,7 +139,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
           {/* Badge */}
           {/* Badge */}
 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-600 mb-8">
-  <Activity className="w-4 h-4" />
+  <History className="w-4 h-4" />
   <span className="text-sm font-semibold">{badge}</span>
 </div>
 
@@ -178,15 +178,15 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 text-gray-600">
             <div className="flex items-center gap-2">
               <Thermometer className="w-5 h-5 text-blue-500" />
-              <span className="text-sm  font-medium">Real-Time Sensors</span>
+              <span className="text-sm  font-medium">Real-Time Environmental Sensors</span>
             </div>
             <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-blue-500" />
-              <span className="text-sm  font-medium">21 CFR Part 11 Ready</span>
+              <ShieldCheck className="w-5 h-5 text-blue-500" />
+              <span className="text-sm  font-medium">IQ/OQ/PQ Validated</span>
             </div>
             <div className="flex items-center gap-2">
-              <Activity className="w-5 h-5 text-blue-500" />
-              <span className="text-sm  font-medium">GMP Compliant</span>
+              <History className="w-5 h-5 text-blue-500" />
+              <span className="text-sm  font-medium">Automated Audit Trails</span>
             </div>
           </div>
         </div>

@@ -210,13 +210,11 @@ export default function SolutionsAlternating() {
                       className="relative w-full max-w-[600px] lg:w-[700px] lg:max-w-none bg-white rounded-xl shadow-2xl border border-blue-400 overflow-hidden transition-transform duration-700 hover:scale-[1.02]"
                     >
                       <div className="flex items-center space-x-1 px-1 py-1 bg-gray-100 border-b border-blue-400 text-xs sm:text-sm h-8 lg:space-x-4 lg:px-3">
-                        <div className="bg-blue-200 px-2 py-1 rounded-t text-gray-900 shadow truncate max-w-[110px] sm:max-w-[140px] lg:max-w-none">
+                        <div className="bg-blue-200 px-2 py-1 rounded-t text-gray-900 shadow truncate max-w-[120px] sm:max-w-[140px] lg:max-w-none">
                           ETPro Dashboard
                         </div>
-                        <div className="px-1 py-1 rounded-t text-gray-600 truncate max-w-[80px] sm:max-w-none">
-                          4D Solutions
-                        </div>
-                        <div className="px-1 py-1 rounded-t text-gray-600 truncate max-w-[65px] sm:max-w-none">
+                        
+                        <div className="px-1 py-1 rounded-t text-gray-600 truncate max-w-[70px] sm:max-w-none">
                           + New Tab
                         </div>
                       </div>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import dynamic from "next/dynamic";
+import { CheckCircle, ArrowRight, Sparkles, Zap, Shield, Award } from "lucide-react";
 
 // DYNAMIC IMPORT FOR LOTTIE PLAYER
 const LottiePlayer = dynamic(
@@ -20,6 +21,7 @@ const products = [
     id: 1,
     slug: "eco-track-pro",
     title: "EcoTrack PRO",
+    tagline: "Real-Time Environmental Intelligence",
     description:
       "A comprehensive web-based platform designed for real-time monitoring, reporting, and compliance management of critical environmental data.",
     features: [
@@ -30,11 +32,14 @@ const products = [
       "User Role Management",
     ],
     image: "/ecotrackpro/capture1.png",
+    badge: "Most Popular",
+    color: "blue",
   },
   {
     id: 2,
     slug: "steritrack",
     title: "SteriTrack",
+    tagline: "Smart Sterilization Monitoring",
     description:
       "SteriTrack is a smart app for real-time sterilization monitoring, providing live temperature data and complete cycle records directly from your autoclaves.",
     features: [
@@ -49,11 +54,14 @@ const products = [
       "/SteriTrack/Dash.jpeg",
       "/SteriTrack/Admin.jpeg",
     ],
+    badge: "Mobile First",
+    color: "blue",
   },
   {
     id: 3,
     slug: "petri-metrics",
     title: "Petri Metrics",
+    tagline: "AI-Powered Zone Analysis",
     description:
       "Zone Reader is an AI tool that measures inhibition zones on assay plates with precision, easy verification, and USP81 compliance.",
     features: [
@@ -64,7 +72,15 @@ const products = [
       "USP81 compliance assured",
     ],
     image: "/ZoneReader/zone2.jpeg",
+    badge: "AI Enhanced",
+    color: "blue",
   },
+];
+
+const platformBenefits = [
+  { icon: Zap, text: "Lightning Fast Performance" },
+  { icon: Shield, text: "Enterprise Security" },
+  { icon: Award, text: "Industry Certified" },
 ];
 
 export default function SolutionsAlternating() {
@@ -148,49 +164,61 @@ export default function SolutionsAlternating() {
     return () => clearInterval(timer);
   }, []);
 
-  // 🟢 LOTTIE CONTROL: play once and stay at last frame
-  useEffect(() => {
-    if (lottieRef.current) {
-      const instance = lottieRef.current;
-      instance.goToAndStop(0, true); // start at first frame
-      instance.play();
-      instance.addEventListener("complete", () => {
-        const lastFrame = instance.getDuration(true);
-        instance.goToAndStop(lastFrame, true);
-      });
-    }
-  }, []);
-
   return (
     <section
       id="solutions"
-      className="bg-white text-gray-900 py-16 px-6 relative overflow-hidden"
+      className="bg-gradient-to-b from-gray-50 to-white text-gray-900 py-20 px-6 relative overflow-hidden"
     >
-      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none"></div>
+      {/* Enhanced background decorations */}
+      <div className="absolute top-0 left-0 w-full h-60 bg-gradient-to-b from-blue-50 to-transparent pointer-events-none"></div>
+      <div className="absolute top-20 right-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+      <div className="absolute bottom-20 left-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
 
-      <div className="max-w-6xl mx-auto space-y-16 relative z-10">
-        {/* Section Heading */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold" data-aos="fade-down">
-            Explore Our <span className="text-primary">Solutions</span>
+      <div className="max-w-6xl mx-auto space-y-20 relative z-10">
+        {/* Enhanced Section Heading */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full mb-4 border border-blue-100" data-aos="fade-down">
+            <Sparkles className="w-4 h-4 text-blue-600" />
+            <span className="text-sm font-semibold text-blue-600">Our Solutions</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold mb-4" data-aos="fade-down" data-aos-delay={100}>
+            Explore Our <span className="gradient-text">Solutions</span>
           </h2>
-          <div className="mt-2 w-20 h-1 bg-primary mx-auto rounded"></div>
+          
+          <div className="mt-4 w-24 h-1 bg-gradient-to-r from-blue-400 to-blue-600 mx-auto rounded-full" data-aos="fade-down" data-aos-delay={200}></div>
+          
           <p
-            className="mt-3 text-muted-foreground max-w-2xl mx-auto"
+            className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
             data-aos="fade-up"
-            data-aos-delay={200}
+            data-aos-delay={300}
           >
             Innovative platforms tailored for web, mobile, and desktop to help
             you monitor, analyze, and optimize with ease.
           </p>
+
+          {/* Platform Benefits */}
+          <div className="flex flex-wrap justify-center gap-6 mt-10" data-aos="fade-up" data-aos-delay={400}>
+            {platformBenefits.map((benefit, idx) => (
+              <div 
+                key={idx}
+                className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-300 hover:scale-105"
+              >
+                <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center">
+                  <benefit.icon className="w-4 h-4 text-blue-600" />
+                </div>
+                <span className="text-sm font-medium text-gray-700">{benefit.text}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {products.map((product, index) => (
           <div key={product.id}>
-            {/* Product Content */}
+            {/* Enhanced Product Content */}
             <div
               ref={product.id === 3 ? product3Ref : null}
-              className={`flex flex-col md:flex-row items-center md:items-center gap-10 ${
+              className={`flex flex-col md:flex-row items-center md:items-center gap-12 ${
                 index % 2 === 1 ? "md:flex-row-reverse" : ""
               }`}
               data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
@@ -207,7 +235,7 @@ export default function SolutionsAlternating() {
                     <div className="hidden lg:block absolute -top-4 -left-4 w-[95%] h-[95%] lg:w-[691px] lg:h-[500px] bg-blue-200 rounded-xl border border-blue-600 shadow-lg opacity-40"></div>
 
                     <div
-                      className="relative w-full max-w-[600px] lg:w-[700px] lg:max-w-none bg-white rounded-xl shadow-2xl border border-blue-400 overflow-hidden transition-transform duration-700 hover:scale-[1.02]"
+                      className="relative w-full max-w-[600px] lg:w-[700px] lg:max-w-none bg-white rounded-xl shadow-2xl border border-blue-400 overflow-hidden transition-all duration-700 hover:scale-[1.02] hover:shadow-blue-200/50"
                     >
                       <div className="flex items-center space-x-1 px-1 py-1 bg-gray-100 border-b border-blue-400 text-xs sm:text-sm h-8 lg:space-x-4 lg:px-3">
                         <div className="bg-blue-200 px-2 py-1 rounded-t text-gray-900 shadow truncate max-w-[120px] sm:max-w-[140px] lg:max-w-none">
@@ -260,7 +288,36 @@ export default function SolutionsAlternating() {
                   </div>
                 )}
 
-               {/* Product 2: SteriTrack Phones Mockup */} {product.id === 2 && ( <div className="relative w-full flex justify-center py-4 sm:py-8 lg:py-12"> {/* Main Mockup Container - Uses fixed pixels on desktop (lg) but shrinks on mobile */} <div className=" relative w-[380px] h-[400px] /* Mobile Base Size: Reduced to prevent clipping/overflow */ lg:w-[500px] lg:h-[520px] /* Desktop Size: Original large dimensions */ group transition-all duration-300 " > {/* Phone 1: Left */} <div className=" absolute left-2 top-10 w-[160px] h-[330px] /* Mobile Position/Size: Condensed */ lg:left-4 lg:top-16 lg:w-[220px] lg:h-[450px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-xl overflow-hidden rotate-[-7deg] scale-95 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-3 group-hover:-rotate-2 group-hover:scale-100 " > <div className="relative w-full h-full animate-floatY bg-white"> <Image src={product.images?.[0] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> {/* Phone 2: Center (Front) */} <div className=" absolute left-1/2 -translate-x-1/2 top-0 w-[170px] h-[360px] /* Mobile Position/Size: Condensed */ lg:w-[230px] lg:h-[460px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-2xl overflow-hidden z-10 scale-105 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-4 group-hover:scale-110 " > <div className="relative w-full h-full animate-floatY delay-200 bg-white"> <Image src={product.images?.[1] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> {/* Phone 3: Right */} <div className=" absolute right-2 top-12 w-[160px] h-[330px] /* Mobile Position/Size: Condensed */ lg:right-4 lg:top-20 lg:w-[220px] lg:h-[450px] /* Desktop Position/Size: Original */ rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-xl overflow-hidden rotate-[7deg] scale-95 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-3 group-hover:rotate-2 group-hover:scale-100 " > <div className="relative w-full h-full animate-floatY delay-400 bg-white"> <Image src={product.images?.[2] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> </div> </div> </div> </div> )}
+               {/* Product 2: SteriTrack Phones Mockup */} 
+               {product.id === 2 && ( 
+                <div className="relative w-full flex justify-center py-4 sm:py-8 lg:py-12"> 
+                  <div className="relative w-[380px] h-[400px] lg:w-[500px] lg:h-[520px] group transition-all duration-300"> 
+                    {/* Phone 1: Left */} 
+                    <div className="absolute left-2 top-10 w-[160px] h-[330px] lg:left-4 lg:top-16 lg:w-[220px] lg:h-[450px] rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-xl overflow-hidden rotate-[-7deg] scale-95 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-3 group-hover:-rotate-2 group-hover:scale-100"> 
+                      <div className="relative w-full h-full animate-floatY bg-white"> 
+                        <Image src={product.images?.[0] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> 
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> 
+                      </div> 
+                    </div> 
+                    
+                    {/* Phone 2: Center (Front) */} 
+                    <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[170px] h-[360px] lg:w-[230px] lg:h-[460px] rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-2xl overflow-hidden z-10 scale-105 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-4 group-hover:scale-110"> 
+                      <div className="relative w-full h-full animate-floatY delay-200 bg-white"> 
+                        <Image src={product.images?.[1] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> 
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> 
+                      </div> 
+                    </div> 
+                    
+                    {/* Phone 3: Right */} 
+                    <div className="absolute right-2 top-12 w-[160px] h-[330px] lg:right-4 lg:top-20 lg:w-[220px] lg:h-[450px] rounded-[2.5rem] border-4 border-gray-300 bg-white shadow-xl overflow-hidden rotate-[7deg] scale-95 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:-translate-y-3 group-hover:rotate-2 group-hover:scale-100"> 
+                      <div className="relative w-full h-full animate-floatY delay-400 bg-white"> 
+                        <Image src={product.images?.[2] || ""} alt={product.title} fill className="object-cover rounded-[2.2rem] bg-white" /> 
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-200 rounded-b-2xl lg:w-20 lg:h-5"></div> 
+                      </div> 
+                    </div> 
+                  </div> 
+                </div> 
+               )}
 
                 {/* Product 3: Petri Metrics */}
                 {product.id === 3 && (
@@ -370,40 +427,61 @@ export default function SolutionsAlternating() {
                 )}
               </div>
 
-              {/* === TEXT === */}
+              {/* === ENHANCED TEXT SECTION === */}
               <div
-  className={`flex-1 ${
-    product.id === 3 ? "-translate-y-20 md:-translate-y-22" : ""
-  }`}
-  data-aos="fade-up"
-  data-aos-delay={200}
->
+                className={`flex-1 ${
+                  product.id === 3 ? "-translate-y-20 md:-translate-y-22" : ""
+                }`}
+                data-aos="fade-up"
+                data-aos-delay={200}
+              >
+                {/* Product Badge */}
+                <div className="inline-flex items-center gap-2 bg-blue-50 px-3 py-1.5 rounded-full mb-4 border border-blue-100">
+                  <Sparkles className="w-4 h-4 text-blue-600" />
+                  <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">{product.badge}</span>
+                </div>
 
-                <h3 className="text-2xl font-bold mb-4">{product.title}</h3>
-                <p className="text-gray-600 mb-6">{product.description}</p>
-                <ul className="space-y-4 mb-6">
-                  {product.features.map((feature, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-center gap-3 hover:text-primary transition-colors"
-                      data-aos="fade-up"
-                      data-aos-delay={100 * (idx + 1)}
-                    >
-                      <span className="text-primary">✔</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Title with enhanced styling */}
+                <h3 className="text-3xl md:text-4xl font-bold mb-2 text-gray-900">{product.title}</h3>
+                
+                {/* Tagline */}
+                <p className="text-lg font-medium text-blue-600 mb-4">{product.tagline}</p>
+                
+                {/* Description with better spacing */}
+                <p className="text-gray-600 mb-8 leading-relaxed text-lg">{product.description}</p>
+                
+                {/* Enhanced features list */}
+                <div className="bg-gray-50 rounded-2xl p-6 mb-8 border border-gray-200">
+                  <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">Key Features</h4>
+                  <ul className="space-y-3">
+                    {product.features.map((feature, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-start gap-3 group cursor-default transition-all duration-300 hover:translate-x-1"
+                        data-aos="fade-up"
+                        data-aos-delay={100 * (idx + 1)}
+                      >
+                        <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-blue-600 transition-colors">
+                          <CheckCircle className="w-4 h-4 text-blue-600 group-hover:text-white transition-colors" />
+                        </div>
+                        <span className="text-gray-700 font-medium group-hover:text-blue-600 transition-colors">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Enhanced CTA Button */}
                 <button
-  onClick={() =>
-    window.open(`/products/${product.slug}`, "_blank", "noopener,noreferrer")
-  }
-  className="px-6 py-2 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-primary/90 transition-colors"
-  data-aos="zoom-in"
-  data-aos-delay={100}
->
-  Learn More
-</button>
+                  onClick={() =>
+                    window.open(`/products/${product.slug}`, "_blank", "noopener,noreferrer")
+                  }
+                  className="group inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:bg-blue-700 transition-all duration-300 hover:scale-105"
+                  data-aos="zoom-in"
+                  data-aos-delay={100}
+                >
+                  Learn More About {product.title}
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
 
                 {product.id === 1 && <div className="mt-20"></div>}
               </div>
@@ -418,57 +496,50 @@ export default function SolutionsAlternating() {
               >
                 <div className="w-full max-w-[600px] lg:max-w-[700px] ml-0">
                 <LottiePlayer
-  loop={false}
-  src={LOTTIE_LINES_URL}
-  style={{ width: "100%", height: "200px" }}
-  lottieRef={(instance) => {
-    if (instance) {
-      // play once and stop at last frame
-      instance.goToAndStop(0, true); // start at first frame
-      instance.play();
-      instance.addEventListener("complete", () => {
-        const lastFrame = instance.getDuration(true);
-        instance.goToAndStop(lastFrame, true);
-      });
-    }
-  }}
-/>
-
+                  loop={false}
+                  src={LOTTIE_LINES_URL}
+                  style={{ width: "100%", height: "200px" }}
+                  lottieRef={(instance) => {
+                    if (instance) {
+                      instance.goToAndStop(0, true);
+                      instance.play();
+                      instance.addEventListener("complete", () => {
+                        const lastFrame = instance.getDuration(true);
+                        instance.goToAndStop(lastFrame, true);
+                      });
+                    }
+                  }}
+                />
                 </div>
               </div>
             )}
 
-
-
-
-{/* LOTTIE ANIMATION AFTER PRODUCT 2 */}
-{product.id === 2 && (
-  <div
-    className="w-full py-2 my-2 flex justify-end"
-    data-aos="fade"
-    data-aos-delay={800}
-  >
-    <div className="w-full max-w-[600px] lg:max-w-[700px] mr-0 transform -scale-x-100">
-      <LottiePlayer
-        loop={false}
-        src={LOTTIE_LINES_URL}
-        style={{ width: "100%", height: "200px" }}
-        lottieRef={(instance) => {
-          if (instance) {
-            instance.goToAndStop(0, true); // start at first frame
-            instance.play();
-            instance.addEventListener("complete", () => {
-              const lastFrame = instance.getDuration(true);
-              instance.goToAndStop(lastFrame, true);
-            });
-          }
-        }}
-      />
-    </div>
-  </div>
-)}
-
-
+            {/* LOTTIE ANIMATION AFTER PRODUCT 2 */}
+            {product.id === 2 && (
+              <div
+                className="w-full py-2 my-2 flex justify-end"
+                data-aos="fade"
+                data-aos-delay={800}
+              >
+                <div className="w-full max-w-[600px] lg:max-w-[700px] mr-0 transform -scale-x-100">
+                  <LottiePlayer
+                    loop={false}
+                    src={LOTTIE_LINES_URL}
+                    style={{ width: "100%", height: "200px" }}
+                    lottieRef={(instance) => {
+                      if (instance) {
+                        instance.goToAndStop(0, true);
+                        instance.play();
+                        instance.addEventListener("complete", () => {
+                          const lastFrame = instance.getDuration(true);
+                          instance.goToAndStop(lastFrame, true);
+                        });
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>

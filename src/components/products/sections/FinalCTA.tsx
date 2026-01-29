@@ -2,9 +2,9 @@ import { Button } from '@/components/products/ui/button';
 import { ArrowRight, Phone, Mail, Calendar, CheckCircle } from 'lucide-react';
 
 const benefits = [
-  'Personalized demo tailored to your industry',
-  'See your use cases in action',
-  'Get pricing customized to your needs',
+  'Personalized demo tailored to your facility',
+  'See real-time monitoring in action',
+  'Get pricing customized to your requirements',
   'No obligation, no pressure',
 ];
 
@@ -19,17 +19,17 @@ export const FinalCTA = () => {
         <div className="max-w-4xl mx-auto">
           {/* Main CTA card */}
           <div className="glass-card rounded-3xl p-8 md:p-12 text-center mb-12">
-          <span className="inline-block px-4 py-2 rounded-full bg-blue-100 text-blue-600 text-sm font-semibold mb-4">
-              Start Your Journey
+            <span className="inline-block px-4 py-2 rounded-full bg-blue-100 text-blue-600 text-sm font-semibold mb-4">
+              Start Monitoring Today
             </span>
             
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Ready to Transform Your<br />
-              <span className="gradient-text">Business?</span>
+              Ready to Elevate Your<br />
+              <span className="gradient-text">Environmental Compliance?</span>
             </h2>
             
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join hundreds of companies that have modernized their quality management with QualityFlow Pro. 
+              Join hundreds of facilities that have streamlined their environmental monitoring with EcoTrackPro. 
               See the platform in action with a personalized demo.
             </p>
 
@@ -52,35 +52,34 @@ export const FinalCTA = () => {
               </Button>
               <Button variant="heroOutline" size="lg">
                 <Phone className="w-5 h-5" />
-                Talk to Sales
+                Talk to Our Team
               </Button>
             </div>
           </div>
 
           {/* Contact options */}
-         {/* Contact options */}
-         <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
             <div className="bg-white rounded-2xl p-6 shadow-card text-center">
               <Mail className="w-8 h-8 text-primary mx-auto mb-3" />
               <h4 className="font-bold text-foreground mb-1">Email Us</h4>
               <p className="text-sm text-muted-foreground mb-2">For general inquiries</p>
-              <a href="mailto:sales@qualityflow.com" className="text-primary font-medium hover:underline">
-                sales@qualityflow.com
+              <a href="mailto:info@ecotrackpro.com" className="text-primary font-medium hover:underline">
+                info@ecotrackpro.com
               </a>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-card text-center">
               <Phone className="w-8 h-8 text-primary mx-auto mb-3" />
               <h4 className="font-bold text-foreground mb-1">Call Us</h4>
-              <p className="text-sm text-muted-foreground mb-2">Mon-Fri, 9am-6pm EST</p>
-              <a href="tel:+1-800-555-0123" className="text-primary font-medium hover:underline">
-                +1 (800) 555-0123
+              <p className="text-sm text-muted-foreground mb-2">Mon-Fri, 8am-6pm EST</p>
+              <a href="tel:+1-800-555-3267" className="text-primary font-medium hover:underline">
+                +1 (800) 555-ECMS
               </a>
             </div>
           </div>
 
           {/* Trust note */}
           <p className="text-center text-sm text-muted-foreground mt-12">
-            🔒 Your data is secure. We never share your information with third parties.
+            🔒 Your data is secure and compliant. We adhere to strict environmental data protection standards.
           </p>
         </div>
       </div>

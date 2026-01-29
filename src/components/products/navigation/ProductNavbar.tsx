@@ -1,22 +1,25 @@
 "use client";
 
-import { Activity } from "lucide-react";
 import Link from "next/link";
 
 export function ProductNavbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo Replacement */}
         <Link href="/" className="flex items-center gap-2">
-          <Activity className="w-8 h-8 text-blue-500" />
+          <img 
+            src="/ecotrackpro.svg" 
+            alt="EcoTrack Pro Logo" 
+            className="h-9 w-auto" 
+          />
           <span className="text-xl font-bold text-foreground">
             EcoTrack Pro
           </span>
         </Link>
 
         {/* Links with Blue Underline Effect */}
-       
+        {/* (Your links logic here) */}
 
         {/* CTA - Updated to match Hero section */}
         <a 

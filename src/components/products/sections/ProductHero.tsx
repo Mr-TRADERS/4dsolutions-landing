@@ -55,7 +55,6 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   const targetPositionRef = useRef({ x: 0, y: 0 });
   const currentPositionRef = useRef({ x: 0, y: 0 });
 
-  // Cleanup animation frame on unmount
   useEffect(() => {
     return () => {
       if (rafIdRef.current !== null) {
@@ -71,31 +70,24 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
       y: e.clientY - rect.top,
     };
 
-    // Cancel any pending animation frame
     if (rafIdRef.current !== null) {
       cancelAnimationFrame(rafIdRef.current);
     }
 
-    // Use requestAnimationFrame for smooth updates
     const updateGlow = () => {
       if (!glowRef.current) return;
 
-      // Smooth interpolation for lag-free feel
       const dx = targetPositionRef.current.x - currentPositionRef.current.x;
       const dy = targetPositionRef.current.y - currentPositionRef.current.y;
-      
-      // Fast interpolation for responsive tracking (0.5 = more responsive, adjust as needed)
+
       currentPositionRef.current.x += dx * 0.5;
       currentPositionRef.current.y += dy * 0.5;
 
-      // Use transform for GPU acceleration
       glowRef.current.style.transform = `translate(${currentPositionRef.current.x - 192}px, ${currentPositionRef.current.y - 192}px)`;
 
-      // Continue animation if we haven't reached the target
       if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
         rafIdRef.current = requestAnimationFrame(updateGlow);
       } else {
-        // Snap to final position for precision
         currentPositionRef.current = { ...targetPositionRef.current };
         glowRef.current.style.transform = `translate(${currentPositionRef.current.x - 192}px, ${currentPositionRef.current.y - 192}px)`;
         rafIdRef.current = null;
@@ -106,12 +98,12 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   };
 
   return (
-    <section 
+    <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* Grid background */}
-      <div 
+      <div
         className="absolute inset-0 opacity-40"
         style={{
           backgroundImage: `
@@ -123,7 +115,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
       />
 
       {/* Mouse hover blue glow */}
-      <div 
+      <div
         ref={glowRef}
         className="pointer-events-none absolute w-96 h-96 rounded-full opacity-30 blur-3xl"
         style={{
@@ -136,21 +128,32 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
 
       <div className="container-wide relative z-10 pt-24 pb-16">
         <div className="max-w-5xl mx-auto text-center">
-          {/* Badge */}
-          {/* Badge */}
-<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-600 mb-8">
-  <History className="w-4 h-4" />
-  <span className="text-sm font-semibold">{badge}</span>
-</div>
 
-          {/* Main heading - "Pro" in blue */}
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight leading-none">
+          {/* Badge */}
+          <div
+            data-aos="fade-down"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-600 mb-8"
+          >
+            <History className="w-4 h-4" />
+            <span className="text-sm font-semibold">{badge}</span>
+          </div>
+
+          {/* Main heading */}
+          <h1
+            data-aos="fade-up"
+            data-aos-delay="100"
+            className="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight leading-none"
+          >
             <span className="text-gray-900">{title.split(" ")[0]} </span>
             <span className="gradient-text">{title.split(" ")[1]}</span>
           </h1>
 
-          {/* Typing effect subheading */}
-          <div className="h-16 md:h-20 flex items-center justify-center mb-8">
+          {/* Typing effect */}
+          <div
+            data-aos="fade-up"
+            data-aos-delay="200"
+            className="h-16 md:h-20 flex items-center justify-center mb-8"
+          >
             <p className="text-xl md:text-3xl text-gray-500 font-medium">
               {displayText}
               <span className="animate-pulse text-primary">|</span>
@@ -158,12 +161,21 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
           </div>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p
+            data-aos="fade-up"
+            data-aos-delay="300"
+            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed"
+          >
             {description}
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+          <div
+            data-aos="zoom-in"
+            data-aos-delay="400"
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-in"
+            style={{ animationDelay: '0.3s' }}
+          >
             <Button variant="hero" size="xl" className="group">
               Request Demo
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -175,20 +187,25 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
           </div>
 
           {/* Trust indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 text-gray-600">
+          <div
+            data-aos="fade-up"
+            data-aos-delay="500"
+            className="flex flex-wrap items-center justify-center gap-8 md:gap-12 text-gray-600"
+          >
             <div className="flex items-center gap-2">
               <Thermometer className="w-5 h-5 text-blue-500" />
-              <span className="text-sm  font-medium">Real-Time Environmental Sensors</span>
+              <span className="text-sm font-medium">Real-Time Environmental Sensors</span>
             </div>
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-blue-500" />
-              <span className="text-sm  font-medium">IQ/OQ/PQ Validated</span>
+              <span className="text-sm font-medium">IQ/OQ/PQ Validated</span>
             </div>
             <div className="flex items-center gap-2">
               <History className="w-5 h-5 text-blue-500" />
-              <span className="text-sm  font-medium">Automated Audit Trails</span>
+              <span className="text-sm font-medium">Automated Audit Trails</span>
             </div>
           </div>
+
         </div>
       </div>
     </section>

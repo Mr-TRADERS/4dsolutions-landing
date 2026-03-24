@@ -135,7 +135,7 @@ export const ProductWalkthrough = () => {
           const nextIdx = (currentIdx + 1) % screens.length;
           return screens[nextIdx];
         });
-      }, 4000); // Change screen every 4 seconds
+      }, 2000); // Change screen every 4 seconds
     }
     return () => clearInterval(interval);
   }, [isAutoPlaying]);

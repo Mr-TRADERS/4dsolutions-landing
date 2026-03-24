@@ -1,43 +1,55 @@
+"use client";
+
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 import { ProductHero } from "@/components/products/sections/ProductHero";
 import { ProductOverview } from "@/components/products/sections/ProductOverview";
 import { ProductWalkthrough } from "@/components/products/sections/ProductWalkthrough";
-
-
-
-
 import { FinalCTA } from "@/components/products/sections/FinalCTA";
 import { ProductNavbar } from "@/components/products/navigation/ProductNavbar";
 
 export default function EcoTrackProPage() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: "ease-in-out",
+    });
+  }, []);
+
   return (
     <>
       <ProductNavbar />
 
       <main className="pt-16">
-        <ProductHero
-          badge="Environmental Monitoring Platform"
-          title="EcoTrack Pro"
-          typingLines={[
-            "Real-time compliance",
-            "Instant alerts & insights",
-            "Audit-ready dashboards",
-          ]}
-          description="Monitor temperature, humidity, and environmental conditions in real-time. Ensure regulatory compliance with automated alerts, audit trails, and GMP-ready reporting for pharmaceutical, healthcare, and laboratory facilities."
-          ctaPrimary="Request Demo"
-          ctaSecondary="Contact Sales"
-        />
+        <div data-aos="fade-up">
+          <ProductHero
+            badge="Environmental Monitoring Platform"
+            title="EcoTrack Pro"
+            typingLines={[
+              "Real-time compliance",
+              "Instant alerts & insights",
+              "Audit-ready dashboards",
+            ]}
+            description="Monitor temperature, humidity, and environmental conditions in real-time. Ensure regulatory compliance with automated alerts, audit trails, and GMP-ready reporting for pharmaceutical, healthcare, and laboratory facilities."
+            ctaPrimary="Request Demo"
+            ctaSecondary="Contact Sales"
+          />
+        </div>
 
-        <ProductOverview />
+        <div data-aos="fade-up" data-aos-delay="100">
+          <ProductOverview />
+        </div>
 
-        <div id="overview">
+        <div id="overview" data-aos="fade-up" data-aos-delay="200">
           <ProductWalkthrough />
         </div>
 
-
-
-        
-     
-        <FinalCTA />
+        <div data-aos="zoom-in" data-aos-delay="150">
+          <FinalCTA />
+        </div>
       </main>
     </>
   );

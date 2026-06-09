@@ -8,28 +8,28 @@ const contactInfo = [
     icon: MailIcon,
     title: "Email",
     description: "Get in touch via email",
-    value: "hello@4dsolutions.com",
-    link: "mailto:hello@4dsolutions.com",
+    value: "info@4d-technologies.net",
+    link: "mailto:info@4d-technologies.net",
   },
   {
     icon: PhoneIcon,
     title: "Phone",
     description: "Speak with our team",
-    value: "+1 (555) 123-4567",
-    link: "tel:+15551234567",
+    value: "+92(213) 889-0351",
+    link: "tel:+92(213) 889-0351",
   },
   {
     icon: MapPinIcon,
     title: "Office",
-    description: "Visit our headquarters",
-    value: "123 Tech Street, San Francisco, CA 94105",
+    description: "Visit our Headquarters",
+    value: "M-6, Mezzanine Floor, Zenith Heights, Gulistan-e-Jauhar, Block 1, Opposite NED University, Karachi",
     link: "#",
   },
   {
     icon: ClockIcon,
     title: "Hours",
     description: "We're here to help",
-    value: "Mon-Fri 9AM-6PM PST",
+    value: "Mon-Sat 09:00am - 06:00pm",
     link: "#",
   },
 ]
@@ -174,7 +174,7 @@ export default function Contact() {
                       type="text"
                       id="firstName"
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-white text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
-                      placeholder="John"
+                      placeholder="Ali"
                     />
                   </div>
                   <div data-aos="fade-up" data-aos-delay="200">
@@ -185,7 +185,7 @@ export default function Contact() {
                       type="text"
                       id="lastName"
                       className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-white text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
-                      placeholder="Doe"
+                      placeholder="Hussain"
                     />
                   </div>
                 </div>
@@ -197,7 +197,7 @@ export default function Contact() {
                     type="email"
                     id="email"
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl bg-white text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 outline-none"
-                    placeholder="john@example.com"
+                    placeholder="ali123@example.com"
                   />
                 </div>
                 <div data-aos="fade-up" data-aos-delay="400">

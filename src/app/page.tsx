@@ -4,7 +4,6 @@ import Hero from "@/components/Hero";
 
 import Solutions from "@/components/Solutions";
 import Clients from "@/components/Clients";   // ⬅️ Import Clients
-import Pricing from "@/components/Pricing";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import SecondaryCta from "@/components/SecondaryCta";
@@ -19,7 +18,6 @@ export default function Home() {
 
       <Solutions />
       <Clients /> {/* ⬅️ New Clients logos slider section */}
-      <Pricing />
       <About />
       <Contact />
       <SecondaryCta />

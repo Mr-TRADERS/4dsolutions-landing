@@ -15,7 +15,6 @@ export default function Navbar() {
 
           <nav className="hidden md:flex items-center justify-center gap-6 text-sm">
             <Link href="#features" className="hover:text-primary transition-colors">Features</Link>
-            <Link href="#pricing" className="hover:text-primary transition-colors">Pricing</Link>
             <Link href="#solutions" className="hover:text-primary transition-colors">Solutions</Link>
             <Link href="#resources" className="hover:text-primary transition-colors">Resources</Link>
             <Link href="#contact" className="hover:text-primary transition-colors">Contact</Link>

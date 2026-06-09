@@ -91,12 +91,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#pricing" className="group inline-flex items-center hover:text-blue-600 transition-colors duration-200">
-                  Pricing
-                  <ArrowUpRight className="size-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-              </li>
-              <li>
                 <Link href="#solutions" className="group inline-flex items-center hover:text-blue-600 transition-colors duration-200">
                   Solutions
                   <ArrowUpRight className="size-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />

@@ -147,6 +147,19 @@ export const ProductWalkthrough = () => {
     return () => clearTimeout(timer);
   }, [activeScreen.id]);
 
+  // Handle ESC key to close fullscreen
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsFullscreen(false);
+      }
+    };
+    if (isFullscreen) {
+      window.addEventListener('keydown', handleEscape);
+    }
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isFullscreen]);
+
   const goToNext = () => {
     const nextIdx = (currentIndex + 1) % screens.length;
     setActiveScreen(screens[nextIdx]);
@@ -159,6 +172,13 @@ export const ProductWalkthrough = () => {
 
   const toggleAutoPlay = () => {
     setIsAutoPlaying(!isAutoPlaying);
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    // Only close if clicking directly on the backdrop, not on content
+    if (e.target === e.currentTarget) {
+      setIsFullscreen(false);
+    }
   };
 
   return (
@@ -312,13 +332,7 @@ export const ProductWalkthrough = () => {
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-2xl font-bold text-gray-900">{activeScreen.title}</h3>
                   {/* Try It Live Button */}
-                  <a
-                    href="#demo"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-sm transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105"
-                  >
-                    Try It Live
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                 
                 </div>
                 <p className="text-gray-600 mb-6">{activeScreen.description}</p>
                 
@@ -353,39 +367,50 @@ export const ProductWalkthrough = () => {
 
       {/* Fullscreen Modal */}
       {isFullscreen && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+        <div 
+          className="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center p-4 animate-in fade-in duration-300 overflow-y-auto"
+          onClick={handleBackdropClick}
+        >
+          {/* Close Button - FIXED POSITION (always visible in viewport) */}
           <button
             onClick={() => setIsFullscreen(false)}
-            className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300"
+            className="fixed top-4 right-4 md:top-6 md:right-6 w-12 md:w-14 h-12 md:h-14 bg-red-600 hover:bg-red-700 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-[60] shadow-lg"
             aria-label="Close fullscreen"
+            title="Press ESC to close"
           >
-            <X className="w-6 h-6 text-white" />
+            <X className="w-6 md:w-8 h-6 md:h-8 text-white font-bold" />
           </button>
           
-          <div className="max-w-7xl w-full">
+          {/* Content Container */}
+          <div className="w-full max-w-7xl flex flex-col items-center justify-center py-8">
             <img
               src={activeScreen.image}
               alt={activeScreen.title}
-              className="w-full h-auto max-h-[90vh] object-contain rounded-lg shadow-2xl"
+              className="w-full h-auto max-h-[70vh] object-contain rounded-lg shadow-2xl"
             />
-            <div className="text-center mt-6">
-              <h3 className="text-2xl font-bold text-white mb-2">{activeScreen.title}</h3>
-              <p className="text-gray-300">{activeScreen.description}</p>
+            <div className="text-center mt-8 px-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">{activeScreen.title}</h3>
+              <p className="text-gray-300 text-sm md:text-base">{activeScreen.description}</p>
+              <p className="text-xs md:text-sm text-gray-400 mt-4">💡 Press ESC, click the red X, or click outside to close</p>
             </div>
           </div>
 
-          {/* Fullscreen navigation */}
+          {/* Fullscreen navigation - LEFT */}
           <button
             onClick={goToPrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300"
+            className="fixed left-2 md:left-4 top-1/2 -translate-y-1/2 w-12 md:w-14 h-12 md:h-14 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-40"
+            aria-label="Previous screen"
           >
-            <ChevronLeft className="w-7 h-7 text-white" />
+            <ChevronLeft className="w-6 md:w-7 h-6 md:h-7 text-white" />
           </button>
+
+          {/* Fullscreen navigation - RIGHT */}
           <button
             onClick={goToNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300"
+            className="fixed right-2 md:right-4 top-1/2 -translate-y-1/2 w-12 md:w-14 h-12 md:h-14 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-40"
+            aria-label="Next screen"
           >
-            <ChevronRight className="w-7 h-7 text-white" />
+            <ChevronRight className="w-6 md:w-7 h-6 md:h-7 text-white" />
           </button>
         </div>
       )}

@@ -63,16 +63,16 @@ export const FinalCTA = () => {
               <Mail className="w-8 h-8 text-primary mx-auto mb-3" />
               <h4 className="font-bold text-foreground mb-1">Email Us</h4>
               <p className="text-sm text-muted-foreground mb-2">For general inquiries</p>
-              <a href="mailto:info@ecotrackpro.com" className="text-primary font-medium hover:underline">
-                info@ecotrackpro.com
+              <a href="mailto:info@4d-technologies.net" className="text-primary font-medium hover:underline">
+              info@4d-technologies.net
               </a>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-card text-center">
               <Phone className="w-8 h-8 text-primary mx-auto mb-3" />
               <h4 className="font-bold text-foreground mb-1">Call Us</h4>
-              <p className="text-sm text-muted-foreground mb-2">Mon-Fri, 8am-6pm EST</p>
-              <a href="tel:+1-800-555-3267" className="text-primary font-medium hover:underline">
-                +1 (800) 555-ECMS
+              <p className="text-sm text-muted-foreground mb-2">Mon-Sat 09:00am - 06:00pm</p>
+              <a href="tel:+92(213) 889-0351" className="text-primary font-medium hover:underline">
+              +92(213) 889-0351
               </a>
             </div>
           </div>

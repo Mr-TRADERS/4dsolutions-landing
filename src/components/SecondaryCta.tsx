@@ -91,21 +91,7 @@ export default function SecondaryCtaV3() {
             </div>
 
             {/* Simple feature badges */}
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {[
-                "No credit card required",
-                "14-day free trial",
-                "Cancel anytime"
-              ].map((text, i) => (
-                <div
-                  key={i}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm text-gray-600 shadow-sm hover:shadow-md transition-shadow duration-300"
-                >
-                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-                  {text}
-                </div>
-              ))}
-            </div>
+           
           </div>
 
           {/* Bottom decorative element */}

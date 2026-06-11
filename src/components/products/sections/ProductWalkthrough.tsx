@@ -182,7 +182,7 @@ export const ProductWalkthrough = () => {
   };
 
   return (
-    <section className="section-padding bg-gray-50 relative overflow-hidden">
+    <section className="section-padding bg-gradient-to-b from-blue-50 via-white to-blue-50 relative overflow-hidden">
       <div className="absolute inset-0 grid-background opacity-20" />
       
       <div className="container-wide relative z-10">

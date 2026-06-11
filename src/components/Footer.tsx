@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { GithubIcon, LinkedinIcon, TwitterIcon, ArrowUpRight } from "lucide-react"
+import { Facebook, Globe, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 
@@ -47,35 +47,32 @@ export default function Footer() {
                 <div className="size-4 bg-white rounded-sm" />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                4D Solutions
+                4D Technologies
               </span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-              Empowering organizations with technology and design excellence.
+              Empowering organizations with advanced environmental monitoring and compliance solutions.
             </p>
             
-            {/* Social links - moved here */}
+            {/* Social links - Facebook & Website only */}
             <div className="flex items-center gap-3">
               <Link 
-                href="#" 
-                aria-label="Twitter" 
+                href="https://www.facebook.com/4dtechnologiess/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook" 
                 className="group flex items-center justify-center size-9 rounded-lg bg-muted/50 hover:bg-blue-500 border border-muted-foreground/10 hover:border-blue-400 transition-all duration-300"
               >
-                <TwitterIcon className="size-4 text-muted-foreground group-hover:text-white transition-colors" />
+                <Facebook className="size-4 text-muted-foreground group-hover:text-white transition-colors" />
               </Link>
               <Link 
-                href="#" 
-                aria-label="GitHub" 
+                href="https://4d-technologies.net/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Website" 
                 className="group flex items-center justify-center size-9 rounded-lg bg-muted/50 hover:bg-blue-500 border border-muted-foreground/10 hover:border-blue-400 transition-all duration-300"
               >
-                <GithubIcon className="size-4 text-muted-foreground group-hover:text-white transition-colors" />
-              </Link>
-              <Link 
-                href="#" 
-                aria-label="LinkedIn" 
-                className="group flex items-center justify-center size-9 rounded-lg bg-muted/50 hover:bg-blue-500 border border-muted-foreground/10 hover:border-blue-400 transition-all duration-300"
-              >
-                <LinkedinIcon className="size-4 text-muted-foreground group-hover:text-white transition-colors" />
+                <Globe className="size-4 text-muted-foreground group-hover:text-white transition-colors" />
               </Link>
             </div>
           </div>
@@ -127,7 +124,7 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-bold mb-4 text-gray-900">Get Started</h4>
             <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
-              Ready to experience smarter monitoring? Start free today.
+              Ready to experience smarter environmental monitoring? Start your free trial today.
             </p>
             <Button 
               size="sm" 
@@ -151,7 +148,7 @@ export default function Footer() {
           className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-muted-foreground/10"
         >
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} 4D Solutions. All rights reserved.
+            © {new Date().getFullYear()} 4D Technologies. All rights reserved.
           </p>
           
           <div className="flex items-center gap-6 text-xs text-muted-foreground">

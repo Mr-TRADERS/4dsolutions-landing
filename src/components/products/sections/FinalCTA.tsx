@@ -10,7 +10,8 @@ const benefits = [
 
 export const FinalCTA = () => {
   return (
-    <section className="section-padding bg-gradient-to-br from-blue-50 via-white to-blue-50 relative overflow-hidden">
+    // ✅ FIXED (matches ProductOverview):
+<section className="section-padding bg-gradient-to-b from-blue-50 via-white to-blue-50 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl" />

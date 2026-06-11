@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { 
   Wifi, Zap, Shield, Database, Radio, Cable, Smartphone, AlertCircle, 
   Lock, Clock, Users, FileText, ChevronRight, Mail, Phone, Globe
@@ -8,6 +10,21 @@ import {
 
 export const ProductOverview = () => {
   const [activeTab, setActiveTab] = useState('connectivity');
+
+  // Initialize AOS on mount
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+      mirror: true,
+      offset: 100,
+      easing: 'ease-in-out',
+    });
+
+    return () => {
+      AOS.refresh();
+    };
+  }, []);
 
   const connectivityFeatures = [
     {
@@ -107,34 +124,58 @@ export const ProductOverview = () => {
       <div className="container-wide relative z-10"><br></br><br></br>
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
+
         <span className="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-primary text-sm font-semibold mb-4">
             Product Overview
           </span>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Advanced, <span className="gradient-text">Environmental Monitoring System</span>
+          <h2 
+            className="text-4xl md:text-5xl font-bold text-foreground mb-4"
+            data-aos="fade-up"
+          >
+            Advanced, <span className="gradient-text">Environmental Monitoring</span> System
           </h2>
-          <p className="text-xl font-semibold mb-4">
+          <p 
+            className="text-xl font-semibold mb-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             Where Precision Meets Reliability
           </p>
-          <div className="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-primary text-sm font-semibold">
+          <div 
+            className="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-primary text-sm font-semibold"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
             🚀 NEW: Advanced Connectivity & Integration
           </div>
-          <p className="text-lg text-muted-foreground mt-6">
+          <p 
+            className="text-lg text-muted-foreground mt-6"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
             EcoTrack PRO is now fully compatible with legacy industrial systems and modern wireless networks, eliminating the need for expensive infrastructure overhauls.
           </p>
         </div>
 
         {/* Connectivity Features - Featured Section */}
         <div className="mb-20">
-          <h3 className="text-2xl font-bold text-center mb-12 text-foreground">
-          <span className="gradient-text"> Next-Generation Connectivity</span>
+          <h3 
+            className="text-2xl font-bold text-center mb-12 text-foreground"
+            data-aos="fade-up"
+          >
+            Next-Generation <span className="gradient-text">Connectivity</span>
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {connectivityFeatures.map((feature, idx) => {
               const Icon = feature.icon;
               return (
-                <div key={idx} className="group relative">
+                <div 
+                  key={idx} 
+                  className="group relative"
+                  data-aos="slide-up"
+                  data-aos-delay={idx * 100}
+                >
                   <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300 blur" 
                        style={{backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))`}} />
                   
@@ -153,10 +194,17 @@ export const ProductOverview = () => {
 
         {/* Key System Features */}
         <div className="mb-20">
-          <h3 className="text-2xl font-bold text-center mb-4 text-foreground">
-          <span className="gradient-text">Key System Features</span>
+          <h3 
+            className="text-2xl font-bold text-center mb-4 text-foreground"
+            data-aos="fade-up"
+          >
+           Key System <span className="gradient-text">Features</span>
           </h3>
-          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p 
+            className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             Comprehensive monitoring, security, and compliance features designed for pharmaceutical and industrial facilities
           </p>
 
@@ -164,7 +212,12 @@ export const ProductOverview = () => {
             {keyFeatures.map((feature, idx) => {
               const Icon = feature.icon;
               return (
-                <div key={idx} className="glass-card rounded-xl p-6 hover:shadow-lg transition-all duration-300 group cursor-default">
+                <div 
+                  key={idx} 
+                  className="glass-card rounded-xl p-6 hover:shadow-lg transition-all duration-300 group cursor-default"
+                  data-aos="fade-up"
+                  data-aos-delay={idx * 50}
+                >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
                       <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-100 group-hover:bg-blue-600 group-hover:text-white transition-all">
@@ -184,12 +237,20 @@ export const ProductOverview = () => {
 
         {/* Why Choose Section */}
         <div className="mb-20">
-          <h3 className="text-2xl font-bold text-center mb-12 text-foreground">
-          <span className="gradient-text">Why Choose EcoTrack PRO?</span>
+          <h3 
+            className="text-2xl font-bold text-center mb-12 text-foreground"
+            data-aos="fade-up"
+          >
+           Why Choose <span className="gradient-text">EcoTrack PRO?</span>
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
             {whyChoose.map((item, idx) => (
-              <div key={idx} className="relative group">
+              <div 
+                key={idx} 
+                className="relative group"
+                data-aos="zoom-in"
+                data-aos-delay={idx * 150}
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur" />
                 
                 <div className="relative bg-white rounded-2xl p-8 border border-gray-200 group-hover:border-transparent transition-all duration-300">
@@ -205,19 +266,25 @@ export const ProductOverview = () => {
         </div>
 
         {/* Hardware Specifications */}
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl border border-blue-200 p-8 md:p-12 mb-20">
-          <h3 className="text-2xl font-bold mb-8 text-foreground">
+        <div 
+          className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl border border-blue-200 p-8 md:p-12 mb-20"
+          data-aos="slide-up"
+        >
+          <h3 
+            className="text-2xl font-bold mb-8 text-foreground"
+            data-aos="fade-up"
+          >
             Deployment & Hardware Specifications
           </h3>
           <div className="grid md:grid-cols-2 gap-8">
-            <div>
+            <div data-aos="fade-right" data-aos-delay="100">
               <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
                 <Shield className="w-5 h-5 text-blue-600" />
                 Architecture
               </h4>
               <p className="text-gray-700">Scalable on-premise local server setup or secure, high-availability cloud integration.</p>
             </div>
-            <div>
+            <div data-aos="fade-left" data-aos-delay="100">
               <h4 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
                 <Database className="w-5 h-5 text-purple-600" />
                 Module Dimensions
@@ -227,11 +294,8 @@ export const ProductOverview = () => {
           </div>
         </div>
 
-        {/* Contact Section */}
        
-
-        {/* CTA Button */}
-        
+      
       </div>
     </section>
   );

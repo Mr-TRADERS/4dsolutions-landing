@@ -7,6 +7,7 @@ import "aos/dist/aos.css";
 import { ProductHero } from "@/components/products/sections/ProductHero";
 import { ProductOverview } from "@/components/products/sections/ProductOverview";
 import { ProductWalkthrough } from "@/components/products/sections/ProductWalkthrough";
+import ClientsSection from "@/components/products/sections/ClientsSection";
 import { FinalCTA } from "@/components/products/sections/FinalCTA";
 import { ProductNavbar } from "@/components/products/navigation/ProductNavbar";
 
@@ -45,6 +46,10 @@ export default function EcoTrackProPage() {
 
         <div id="overview" data-aos="fade-up" data-aos-delay="200">
           <ProductWalkthrough />
+        </div>
+
+        <div id="overview" data-aos="fade-up" data-aos-delay="200">
+          <ClientsSection />
         </div>
 
         <div data-aos="zoom-in" data-aos-delay="150">

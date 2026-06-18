@@ -1,10 +1,27 @@
 "use client";
 
+import Spline from "@splinetool/react-spline";
+
 import React, { useState, useEffect, useRef } from "react";
 import { ArrowUp } from "lucide-react";
 import dynamic from 'next/dynamic'; 
 import { BadgeCheck, Globe, ShieldCheck } from "lucide-react";
 
+// TypeScript declaration for Spline viewer custom element
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'spline-viewer': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & {
+          url?: string;
+          loading?: string;
+          'on-load'?: () => void;
+        },
+        HTMLElement
+      >;
+    }
+  }
+}
 
 // DYNAMIC IMPORT FIX
 const LottiePlayer = dynamic(
@@ -17,19 +34,20 @@ const LOTTIE_WAVE_URL = "/anims/WaveLinesAnimation.json";
 
 const PRIMARY_COLOR = "#1e9df1";
 const SECONDARY_COLOR = "#0ea5e9";
-const PRIMARY_COLOR_TWO = "#0077e6"; // Your new darker button color
+const PRIMARY_COLOR_TWO = "#0077e6";
 
 const HeroSection: React.FC = () => {
   const [showTopBtn, setShowTopBtn] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [displayText, setDisplayText] = useState("");
   const [currentLine, setCurrentLine] = useState(0);
+  const [splineLoaded, setSplineLoaded] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const cubeRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   
-  // Enhanced Typing Animation with Line Breaks (No Changes)
+  // Enhanced Typing Animation with Line Breaks
   useEffect(() => {
     const texts = [
       { line1: "Smarter", line2: "Environments" },
@@ -124,7 +142,6 @@ const HeroSection: React.FC = () => {
         glowRef.current.style.background = `radial-gradient(circle at center, rgba(30,157,241,${intensity}) 0%, transparent 70%)`;
       }
 
-      // Enhanced grid parallax effect
       if (gridRef.current) {
         const moveX = (x / window.innerWidth - 0.5) * 20;
         const moveY = (y / window.innerHeight - 0.5) * 20;
@@ -158,7 +175,7 @@ const HeroSection: React.FC = () => {
 
   return (
     <>
-      {/* Header (No Changes) */}
+      {/* Header */}
       <header
         className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md"
         data-aos="fade-down"
@@ -212,10 +229,9 @@ const HeroSection: React.FC = () => {
       <section
         id="home"
         ref={containerRef}
-        // FIX: Set a larger padding-bottom to reserve space for the wave.
         className="relative bg-white min-h-screen flex items-center justify-center pt-20 pb-[50px] max-w-full" 
       >
-        {/* Animated Grid Background (No Changes) */}
+        {/* Animated Grid Background */}
         <div
           ref={gridRef}
           className="absolute inset-0 z-0 pointer-events-none transition-transform duration-300 ease-out"
@@ -230,7 +246,7 @@ const HeroSection: React.FC = () => {
           }}
         ></div>
 
-        {/* Secondary Moving Grid Layer (No Changes) */}
+        {/* Secondary Moving Grid Layer */}
         <div
           className="absolute inset-0 z-0 pointer-events-none opacity-40"
           style={{
@@ -244,7 +260,7 @@ const HeroSection: React.FC = () => {
           }}
         ></div>
 
-        {/* Blue parallax glow (No Changes) */}
+        {/* Blue parallax glow */}
         <div
           className="absolute inset-0 z-0"
           style={{
@@ -253,8 +269,8 @@ const HeroSection: React.FC = () => {
           }}
         ></div>
 
-        <div className="relative z-20 max-w-7xl mx-auto px-6 py-20 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left Section (No Changes) */}
+        <div className="relative z-20 max-w-7xl mx-auto px-6 py-20 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+          {/* Left Section */}
           <div
             className="space-y-10 text-center lg:text-left"
             data-aos="fade-right"
@@ -295,160 +311,100 @@ const HeroSection: React.FC = () => {
               data-aos="fade-up"
               data-aos-delay="600"
             >
-              {/* Buttons (No Changes) */}
               <button
-  onClick={() => handleScroll("solutions")}
-  className="relative px-6 sm:px-8 py-3 sm:py-4 font-bold rounded-xl text-white overflow-hidden group transition-all duration-500 ease-out transform hover:scale-105 text-base sm:text-lg shadow-xl"
-  style={{ 
-    // This blends your two colors from top to bottom
-    background: `linear-gradient(135deg, ${PRIMARY_COLOR} 0%, ${PRIMARY_COLOR_TWO} 100%)` 
-  }}
->
-  {/* Shine effect (keep this, it looks great on gradients) */}
-  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out"></div>
-  
-  {/* Hover overlay: makes the whole button brighten slightly */}
-  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                onClick={() => handleScroll("solutions")}
+                className="relative px-6 sm:px-8 py-3 sm:py-4 font-bold rounded-xl text-white overflow-hidden group transition-all duration-500 ease-out transform hover:scale-105 text-base sm:text-lg shadow-xl"
+                style={{ 
+                  background: `linear-gradient(135deg, ${PRIMARY_COLOR} 0%, ${PRIMARY_COLOR_TWO} 100%)` 
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out"></div>
+                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10 transition-all duration-300 group-hover:tracking-wider">
+                  Explore Solutions
+                </span>
+              </button>
 
-  <span className="relative z-10 transition-all duration-300 group-hover:tracking-wider">
-    Explore Solutions
-  </span>
-</button>
-
-<button
-  onClick={() => handleScroll("about")}
-  className="relative px-6 sm:px-8 py-3 sm:py-4 font-bold rounded-xl overflow-hidden group transition-all duration-500 ease-out transform hover:scale-105 text-base sm:text-lg border-2 border-blue-500 hover:border-blue-600"
->
-  {/* Text with blue gradient */}
-  <span className="relative z-10 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent group-hover:from-blue-500 group-hover:to-blue-700 transition-all duration-300 group-hover:tracking-wider">
-    Learn More
-  </span>
-  
-  {/* Arrow icon animation */}
-  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
-    <svg className="w-4 h-4 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-    </svg>
-  </div>
-</button>
+              <button
+                onClick={() => handleScroll("about")}
+                className="relative px-6 sm:px-8 py-3 sm:py-4 font-bold rounded-xl overflow-hidden group transition-all duration-500 ease-out transform hover:scale-105 text-base sm:text-lg border-2 border-blue-500 hover:border-blue-600"
+              >
+                <span className="relative z-10 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent group-hover:from-blue-500 group-hover:to-blue-700 transition-all duration-300 group-hover:tracking-wider">
+                  Learn More
+                </span>
+                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
+                  <svg className="w-4 h-4 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </button>
             </div>
 
-            {/* Feature badges (No Changes) */}
             {/* Feature badges */}
-<div
-  className="flex flex-wrap gap-2 sm:gap-3 mt-6 justify-center lg:justify-start font-[var(--font-geist-sans)]"
-  data-aos="fade-up"
-  data-aos-delay="800"
->
-  {/* Badge 1 */}
-  <div className="relative group whitespace-nowrap">
-    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
-    <span className="relative flex items-center gap-2 px-3 py-2 rounded-full bg-primary/10 text-primary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent text-sm sm:text-base">
-      <BadgeCheck className="w-5 h-5" />
-      Industry Expertise
-    </span>
-  </div>
+            <div
+              className="flex flex-wrap gap-2 sm:gap-3 mt-6 justify-center lg:justify-start font-[var(--font-geist-sans)]"
+              data-aos="fade-up"
+              data-aos-delay="800"
+            >
+              <div className="relative group whitespace-nowrap">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
+                <span className="relative flex items-center gap-2 px-3 py-2 rounded-full bg-primary/10 text-primary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent text-sm sm:text-base">
+                  <BadgeCheck className="w-5 h-5" />
+                  Industry Expertise
+                </span>
+              </div>
 
-  {/* Badge 2 */}
-  <div className="relative group whitespace-nowrap">
-    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
-    <span className="relative flex items-center gap-2 px-3 py-2 rounded-full bg-primary/10 text-primary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent text-sm sm:text-base">
-      <Globe className="w-5 h-5" />
-      Global Reach
-    </span>
-  </div>
+              <div className="relative group whitespace-nowrap">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
+                <span className="relative flex items-center gap-2 px-3 py-2 rounded-full bg-primary/10 text-primary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent text-sm sm:text-base">
+                  <Globe className="w-5 h-5" />
+                  Global Reach
+                </span>
+              </div>
 
-  {/* Badge 3 */}
-  <div className="relative group whitespace-nowrap">
-    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
-    <span className="relative flex items-center gap-2 px-3 py-2 rounded-full bg-primary/10 text-primary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent text-sm sm:text-base">
-      <ShieldCheck className="w-5 h-5" />
-      Compliance-Driven
-    </span>
-  </div>
-</div>
+              <div className="relative group whitespace-nowrap">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-500 animate-gradient-x"></div>
+                <span className="relative flex items-center gap-2 px-3 py-2 rounded-full bg-primary/10 text-primary font-medium transition-all duration-300 group-hover:scale-105 group-hover:text-white group-hover:bg-transparent text-sm sm:text-base">
+                  <ShieldCheck className="w-5 h-5" />
+                  Compliance-Driven
+                </span>
+              </div>
+            </div>
           </div>
 
-          {/* Right Cube (No Changes) */}
+          {/* Right Section - Spline 3D Viewer */}
           <div
-            className="relative w-full max-w-[400px] sm:max-w-[450px] md:max-w-[550px] lg:max-w-[650px] flex items-center justify-center"
+            className="w-full h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px]"
             data-aos="zoom-in-left"
             data-aos-delay="500"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden'
+            }}
           >
             <div
-              ref={cubeRef}
-              className="relative w-[180px] sm:w-[220px] md:w-[260px] lg:w-[360px] aspect-square flex items-center justify-center transition-transform duration-700 ease-out"
               style={{
-                transformStyle: "preserve-3d",
-                transform: "rotateY(5deg) rotateX(-5deg)",
+                width: '100%',
+                height: '100%',
+                transform: 'scale(1.5)',  // ← CHANGE THIS NUMBER: 1.2, 1.3, 1.4, 1.5, 1.6, etc.
+                transformOrigin: 'center center'
               }}
             >
-              {/* Glow */}
-              <div
-                ref={glowRef}
-                className="absolute w-[160px] sm:w-[180px] md:w-[200px] lg:w-[340px] aspect-square rounded-full blur-3xl transition-all duration-300 ease-out"
-                style={{
-                  background: `radial-gradient(circle, ${PRIMARY_COLOR}25, transparent 70%)`,
-                }}
-                data-aos="zoom-in"
-                data-aos-delay="600"
-              ></div>
-
-              {/* Cube Faces */}
-              <div className="absolute w-full h-full animate-[spin_18s_linear_infinite] [transform-style:preserve-3d]">
-                {cubeFaceTransforms.map((t, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-full h-full border border-blue-400/30 rounded-xl"
-                    style={{
-                      transform: t,
-                      boxShadow: `0 0 20px ${PRIMARY_COLOR}40`,
-                      background: `linear-gradient(145deg, ${PRIMARY_COLOR}05, ${PRIMARY_COLOR}15)`,
-                    }}
-                    data-aos="fade-up"
-                    data-aos-delay={100 + i * 150}
-                  ></div>
-                ))}
-              </div>
-
-              {/* Center Logo */}
-              <div
-                className="relative z-30 flex items-center justify-center"
-                data-aos="zoom-in"
-                data-aos-delay="1000"
-              >
-                <div
-                  className="absolute w-[100px] sm:w-[140px] md:w-[160px] lg:w-[220px] h-[100px] sm:h-[140px] md:h-[160px] lg:h-[220px] rounded-full blur-3xl opacity-50 animate-pulse-slow"
-                  style={{
-                    background: `radial-gradient(circle, ${PRIMARY_COLOR}35, ${PRIMARY_COLOR}05 70%, transparent 100%)`,
-                  }}
-                ></div>
-
-                <div
-                  className="absolute w-[90px] sm:w-[120px] md:w-[140px] lg:w-[200px] h-[90px] sm:h-[120px] md:h-[140px] lg:h-[200px] rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-30 animate-spin-slow"
-                  style={{
-                    mixBlendMode: "overlay",
-                    maskImage: "radial-gradient(circle at center, white 40%, transparent 80%)",
-                    WebkitMaskImage: "radial-gradient(circle at center, white 40%, transparent 80%)",
-                  }}
-                ></div>
-
-                <img
-                  src="/logo.svg"
-                  alt="4D"
-                  className="relative w-[80px] sm:w-[110px] md:w-[130px] lg:w-[180px] object-contain"
-                  style={{ filter: `drop-shadow(0 0 35px ${PRIMARY_COLOR}90)` }}
-                />
-              </div>
+              <Spline
+                scene="https://prod.spline.design/59vlx0c29IL44sK6/scene.splinecode"
+                onLoad={() => setSplineLoaded(true)}
+              />
             </div>
           </div>
         </div>
         
-        {/* 🌊 LOTTIE ANIMATION: END OF SECTION / FULL VIEWPORT WIDTH - AOS ADDED HERE */}
+        {/* Lottie Wave Animation */}
         <div
           className="absolute z-30 pointer-events-none"
-          data-aos="fade-up" // ✅ AOS Animation
-          data-aos-duration="1500" // ✅ Longer duration for a smoother reveal
+          data-aos="fade-up"
+          data-aos-duration="1500"
           style={{
             width: '100vw', 
             left: '50%',    
@@ -466,10 +422,9 @@ const HeroSection: React.FC = () => {
               style={{ width: '100%', height: '150px' }} 
           />
         </div>
-
       </section>
 
-      {/* Back to Top (No Changes) */}
+      {/* Back to Top */}
       {showTopBtn && (
         <div className="fixed bottom-8 right-8 z-50">
           <div className="relative group">
@@ -485,7 +440,7 @@ const HeroSection: React.FC = () => {
         </div>
       )}
 
-      {/* Enhanced CSS animations (No Changes) */}
+      {/* CSS animations */}
       <style jsx>{`
         @keyframes pulse-scale {
           0%, 100% { transform: scale(1); opacity: 1; }

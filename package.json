@@ -21,6 +21,7 @@
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.4.0",
     "@rive-app/react-canvas": "^4.24.0",
+    "@splinetool/react-spline": "^4.1.0",
     "@tsparticles/engine": "^3.9.1",
     "@tsparticles/plugin-polygon-mask": "^3.9.1",
     "@tsparticles/react": "^3.0.0",

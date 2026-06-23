@@ -19,6 +19,7 @@ const clientsRow2 = [
   "/logos/sanofi.jpg",
   "/logos/searl.jpg",
   "/logos/scilife.jpg",
+  "/logos/sami.jpg",
 ];
 
 export default function Clients() {

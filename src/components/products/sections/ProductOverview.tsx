@@ -5,7 +5,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { 
   Wifi, Zap, Shield, Database, Radio, Cable, Smartphone, AlertCircle, 
-  Lock, Clock, Users, FileText, ChevronRight, Mail, Phone, Globe
+  Lock, Clock, Users, FileText, ChevronRight, Mail, Phone, Globe, Sparkles
 } from 'lucide-react';
 
 export const ProductOverview = () => {
@@ -147,7 +147,8 @@ export const ProductOverview = () => {
             data-aos="zoom-in"
             data-aos-delay="200"
           >
-            🚀 NEW: Advanced Connectivity & Integration
+            <Sparkles className="w-4 h-4 inline-block mr-2" />
+            NEW: Advanced Connectivity & Integration
           </div>
           <p 
             className="text-lg text-muted-foreground mt-6"

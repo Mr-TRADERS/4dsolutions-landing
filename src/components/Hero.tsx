@@ -229,7 +229,7 @@ const HeroSection: React.FC = () => {
       <section
         id="home"
         ref={containerRef}
-        className="relative bg-white min-h-screen flex items-center justify-center pt-20 pb-[50px] max-w-full" 
+        className="relative bg-white min-h-screen flex items-center justify-center pt-16 pb-0 w-full overflow-hidden" 
       >
         {/* Animated Grid Background */}
         <div
@@ -269,10 +269,11 @@ const HeroSection: React.FC = () => {
           }}
         ></div>
 
-        <div className="relative z-20 max-w-7xl mx-auto px-6 py-20 lg:py-32 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+        <div className="relative z-20 w-full px-3 sm:px-4 md:px-6 py-12 lg:py-16 flex justify-center">
+          <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
           {/* Left Section */}
           <div
-            className="space-y-10 text-center lg:text-left"
+            className="space-y-6 text-center lg:text-left"
             data-aos="fade-right"
             data-aos-duration="1200"
           >
@@ -307,7 +308,7 @@ const HeroSection: React.FC = () => {
             </p>
 
             <div
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-0"
               data-aos="fade-up"
               data-aos-delay="600"
             >
@@ -342,7 +343,7 @@ const HeroSection: React.FC = () => {
 
             {/* Feature badges */}
             <div
-              className="flex flex-wrap gap-2 sm:gap-3 mt-6 justify-center lg:justify-start font-[var(--font-geist-sans)]"
+              className="flex flex-wrap gap-2 sm:gap-3 mt-2 justify-center lg:justify-start font-[var(--font-geist-sans)]"
               data-aos="fade-up"
               data-aos-delay="800"
             >
@@ -398,18 +399,17 @@ const HeroSection: React.FC = () => {
               />
             </div>
           </div>
+          </div>
         </div>
         
         {/* Lottie Wave Animation */}
         <div
-          className="absolute z-30 pointer-events-none"
+          className="absolute z-30 pointer-events-none w-full"
           data-aos="fade-up"
           data-aos-duration="1500"
           style={{
-            width: '100vw', 
-            left: '50%',    
-            transform: 'translateX(-50%)', 
-            bottom: '-30px' 
+            bottom: '0',
+            left: '0'
           }}
         >
           <LottiePlayer 
@@ -419,7 +419,7 @@ const HeroSection: React.FC = () => {
               rendererSettings={{
                   preserveAspectRatio: 'none', 
               }}
-              style={{ width: '100%', height: '150px' }} 
+              style={{ width: '100%', height: '150px', display: 'block' }} 
           />
         </div>
       </section>

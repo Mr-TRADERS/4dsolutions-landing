@@ -167,12 +167,21 @@ export default function SolutionsAlternating() {
   return (
     <section
       id="solutions"
-      className="bg-gradient-to-b from-gray-50 to-white text-gray-900 py-20 px-6 relative overflow-hidden"
+      className="relative py-20 px-6 overflow-hidden text-gray-900"
+      style={{
+        backgroundImage: `url('/bg.jpg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
     >
+      {/* Overlay for better text contrast - optional but recommended */}
+      <div className="absolute inset-0 bg-white/30 pointer-events-none"></div>
+
       {/* Enhanced background decorations */}
-      <div className="absolute top-0 left-0 w-full h-60 bg-gradient-to-b from-blue-50 to-transparent pointer-events-none"></div>
-      <div className="absolute top-20 right-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-      <div className="absolute bottom-20 left-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute top-0 left-0 w-full h-60 bg-gradient-to-b from-blue-50/40 to-transparent pointer-events-none"></div>
+      <div className="absolute top-20 right-0 w-96 h-96 bg-blue-100/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+      <div className="absolute bottom-20 left-0 w-96 h-96 bg-blue-100/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
 
       <div className="max-w-6xl mx-auto space-y-20 relative z-10">
         {/* Enhanced Section Heading */}

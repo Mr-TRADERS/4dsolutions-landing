@@ -19,7 +19,7 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
   title,
   typingLines,
   description,
-  ctaPrimary = "Request Demo",
+  ctaPrimary = "Get Started",
   ctaSecondary = "Contact Sales",
 }) => {
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
@@ -95,6 +95,10 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
     };
 
     rafIdRef.current = requestAnimationFrame(updateGlow);
+  };
+
+  const scrollToContact = () => {
+    document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -176,13 +180,13 @@ export const ProductHero: React.FC<ProductHeroProps> = ({
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-fade-in"
             style={{ animationDelay: '0.3s' }}
           >
-            <Button variant="hero" size="xl" className="group">
-              Request Demo
+            <Button variant="hero" size="xl" className="group" onClick={scrollToContact}>
+              {ctaPrimary}
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="heroOutline" size="xl" className="group">
+            <Button variant="heroOutline" size="xl" className="group" onClick={scrollToContact}>
               <Play className="mr-2 w-5 h-5" />
-              Contact Sales
+              {ctaSecondary}
             </Button>
           </div>
 

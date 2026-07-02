@@ -1,5 +1,5 @@
 import { Button } from '@/components/products/ui/button';
-import { ArrowRight, Phone, Mail, Calendar, CheckCircle } from 'lucide-react';
+import { ArrowRight, Phone, Mail, CheckCircle } from 'lucide-react';
 
 const benefits = [
   'Personalized demo tailored to your facility',
@@ -11,7 +11,7 @@ const benefits = [
 export const FinalCTA = () => {
   return (
     // ✅ FIXED (matches ProductOverview):
-<section className="section-padding bg-gradient-to-b from-blue-50 via-white to-blue-50 relative overflow-hidden">
+<section id="contact-form" className="section-padding bg-gradient-to-b from-blue-50 via-white to-blue-50 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl" />
@@ -46,15 +46,19 @@ export const FinalCTA = () => {
 
             {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="hero" size="xl">
-                <Calendar className="w-5 h-5" />
-                Schedule Your Demo
-                <ArrowRight className="w-5 h-5" />
-              </Button>
-              <Button variant="heroOutline" size="lg">
-                <Phone className="w-5 h-5" />
-                Talk to Our Team
-              </Button>
+              <a href="mailto:info@4d-technologies.net">
+                <Button variant="hero" size="xl">
+                  <Mail className="w-5 h-5" />
+                  Get in Touch
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </a>
+              <a href="tel:+92(213) 889-0351">
+                <Button variant="heroOutline" size="lg">
+                  <Phone className="w-5 h-5" />
+                  Talk to Our Team
+                </Button>
+              </a>
             </div>
           </div>
 

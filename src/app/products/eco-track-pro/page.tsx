@@ -26,18 +26,18 @@ export default function EcoTrackProPage() {
 
       <main className="pt-16">
         <div data-aos="fade-up">
-          <ProductHero
-            badge="Environmental Monitoring Platform"
-            title="EcoTrack Pro"
-            typingLines={[
-              "Real-time compliance",
-              "Instant alerts & insights",
-              "Audit-ready dashboards",
-            ]}
-            description="Monitor temperature, humidity, and environmental conditions in real-time. Ensure regulatory compliance with automated alerts, audit trails, and GMP-ready reporting for pharmaceutical, healthcare, and laboratory facilities."
-            ctaPrimary="Request Demo"
-            ctaSecondary="Contact Sales"
-          />
+        <ProductHero
+  badge="Environmental Monitoring Platform"
+  title="EcoTrack Pro"
+  typingLines={[
+    "Real-time compliance",
+    "Instant alerts & insights",
+    "Audit-ready dashboards",
+  ]}
+  description="Monitor temperature, humidity, and environmental conditions in real-time. Ensure regulatory compliance with automated alerts, audit trails, and GMP-ready reporting for pharmaceutical, healthcare, and laboratory facilities."
+  ctaPrimary="Get Started"
+  ctaSecondary="Contact Sales"
+/>
         </div>
 
         <div data-aos="fade-up" data-aos-delay="100">
@@ -52,9 +52,9 @@ export default function EcoTrackProPage() {
           <ClientsSection />
         </div>
 
-        <div data-aos="zoom-in" data-aos-delay="150">
-          <FinalCTA />
-        </div>
+        <div id="contact-form" data-aos="zoom-in" data-aos-delay="150">
+  <FinalCTA />
+</div>
       </main>
     </>
   );

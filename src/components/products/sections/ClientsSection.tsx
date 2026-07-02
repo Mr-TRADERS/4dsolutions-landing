@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import { Award } from 'lucide-react';
 
 interface Client {
   name: string;
@@ -47,12 +48,11 @@ const ClientsSection: React.FC = () => {
       <div className="relative z-10 container-wide mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <span 
-            className="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-primary text-sm font-semibold mb-4"
-            data-aos="zoom-in"
-          >
-            ✅ Trusted by Industry Leaders
-          </span>
+        
+<span className="inline-flex items-center gap-1 px-4 py-1.5 rounded-full bg-blue-100 text-primary text-sm font-semibold mb-4 whitespace-nowrap">
+  <Award className="w-5 h-5 flex-shrink-0" />
+  Trusted by Industry Leaders
+</span>
           
           <h2 
             className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
@@ -162,10 +162,10 @@ const ClientsSection: React.FC = () => {
             Join leading pharmaceutical companies trusting EcoTrack Pro
           </p>
           <a
-            href="#get-started"
+            href="#overview"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
           >
-            Request a Demo
+            See Full Platform Overview
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
